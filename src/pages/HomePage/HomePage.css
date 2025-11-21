@@ -2058,7 +2058,7 @@ body {
   }
   .hero-section {
   height: auto;
-  padding: 40px 0;
+  padding: 120px 0 40px;
   min-height: auto;
 }
 
@@ -2160,7 +2160,13 @@ body {
   .nav-menu {
     display: none;
   }
+  .logos-container {
+    animation: scroll 10s linear infinite; /* Faster on mobile */
+  }
   
+  .logo-item {
+    margin: 0 30px; /* Reduce spacing on mobile */
+  }
   .hero-title {
     font-size: 36px;
   }
@@ -2176,7 +2182,10 @@ body {
   .blogs-grid {
     grid-template-columns: 1fr;
   }
-  
+  .service-card {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
   .stats-grid {
     grid-template-columns: 1fr;
   }
@@ -2210,35 +2219,7 @@ body {
     font-size: 24px;
     z-index: 10;
   }
-  .services-container {
-    display: flex;
-    flex-direction: column; /* Stack cards */
-    gap: 20px;
-    padding: 0 20px;
-  }
-
-  .service-card {
-    width: 100%;
-    max-width: 100%;
-    text-align: center;
-    border-right: none !important; /* Remove vertical divider lines */
-    border-bottom: 1px solid #eee; /* Optional clean divider */
-    padding: 20px;
-  }
-
-  .service-card:last-child {
-    border-bottom: none;
-  }
-
-  .service-card h3 {
-    font-size: 20px;
-    line-height: 1.4;
-  }
-
-  .service-card p {
-    font-size: 15px;
-    line-height: 1.6;
-  }
+  
 }
 
 /* Enhanced Animations */
