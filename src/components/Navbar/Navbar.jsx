@@ -6,7 +6,7 @@ const Navbar = ({ openContactModal }) => {  // Add this prop
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [resourcesDropdownOpen, setResourcesDropdownOpen] = useState(false);
-
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'services', 'industries', 'blogs', 'promotions'];
@@ -70,66 +70,64 @@ const Navbar = ({ openContactModal }) => {  // Add this prop
           </button>
 
           <nav className={`nav-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
-            <a 
-              href="#home" 
-              className={`nav-link ${activeSection === 'home' ? 'active' : ''}`}
-              onClick={(e) => scrollToSection(e, 'home')}
-            >
-              Home
-            </a>
-            {/* <a 
-              href="#about" 
-              className={`nav-link ${activeSection === 'about' ? 'active' : ''}`}
-              onClick={(e) => scrollToSection(e, 'about')}
-            >
-              About Us
-            </a>*/}
-            <a 
-              href="#services" 
-              className={`nav-link ${activeSection === 'services' ? 'active' : ''}`}
-              onClick={(e) => scrollToSection(e, 'services')}
-            >
-              Services
-            </a>
-            <a 
-              href="#industries" 
-              className={`nav-link ${activeSection === 'industries' ? 'active' : ''}`}
-              onClick={(e) => scrollToSection(e, 'industries')}
-            >
-              Industries
-            </a>
-            
-            {/* Resources Dropdown */}
-            <div className="nav-dropdown">
-              <button 
-                className={`nav-link dropdown-toggle ${activeSection === 'blogs' ? 'active' : ''}`}
-                onClick={toggleResourcesDropdown}
-              >
-                Resources
-                <span className={`dropdown-arrow ${resourcesDropdownOpen ? 'open' : ''}`}>▼</span>
-              </button>
-              <div className={`dropdown-menu ${resourcesDropdownOpen ? 'show' : ''}`}>
-                <a href="#blogs" className="dropdown-item" onClick={(e) => scrollToSection(e, 'blogs')}>
-                  Blogs
-                </a>
-                <a href="#guidelines" className="dropdown-item" onClick={(e) => scrollToSection(e, 'guidelines')}>
-                  Guidelines
-                </a>
-                <a href="#casestudies" className="dropdown-item" onClick={(e) => scrollToSection(e, 'casestudies')}>
-                  Case Studies
-                </a>
-              </div>
-            </div>
+  <a href="/" className="nav-link">
+    Home
+  </a>
+  
+  <div className="nav-dropdown">
+    <button 
+      className="nav-link dropdown-toggle"
+      onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+    >
+      Services
+      <span className={`dropdown-arrow ${servicesDropdownOpen ? 'open' : ''}`}>▼</span>
+    </button>
+    <div className={`dropdown-menu ${servicesDropdownOpen ? 'show' : ''}`}>
+      <a href="/managed-it-services" className="dropdown-item">
+        Managed IT Services
+      </a>
+      <a href="/managed-security-services" className="dropdown-item">
+        Managed Security Services
+      </a>
+      <a href="/cloud-infrastructure" className="dropdown-item">
+        Cloud and Infrastructure services
+      </a>
+      <a href="/security-assessments" className="dropdown-item">
+        Security Assessments and compliance
+      </a>
+      <a href="/data-protection" className="dropdown-item">
+        Data Protection and Recovery
+      </a>
+    </div>
+  </div>
 
-           {/*  <a 
-              href="#promotions" 
-              className={`nav-link ${activeSection === 'promotions' ? 'active' : ''}`}
-              onClick={(e) => scrollToSection(e, 'promotions')}
-            >
-              Promotions
-            </a>*/}
-            <button className="btn-contact mobile-contact" onClick={openContactModal}>Contact Us</button>
-          </nav>
+  <a href="/industries" className="nav-link">
+    Industries
+  </a>
+  
+  <div className="nav-dropdown">
+    <button 
+      className="nav-link dropdown-toggle"
+      onClick={toggleResourcesDropdown}
+    >
+      Resources
+      <span className={`dropdown-arrow ${resourcesDropdownOpen ? 'open' : ''}`}>▼</span>
+    </button>
+    <div className={`dropdown-menu ${resourcesDropdownOpen ? 'show' : ''}`}>
+      <a href="/blogs" className="dropdown-item">
+        Blogs
+      </a>
+      <a href="/guidelines" className="dropdown-item">
+        Guidelines
+      </a>
+      <a href="/case-studies" className="dropdown-item">
+        Case Studies
+      </a>
+    </div>
+  </div>
+
+  <button className="btn-contact mobile-contact" onClick={openContactModal}>Contact Us</button>
+</nav>
           <button className="btn-contact desktop-contact" onClick={openContactModal}>Contact Us</button>
         </div>
       </div>

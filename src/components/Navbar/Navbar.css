@@ -2,13 +2,25 @@
 .header {
   background: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   animation: slideDown 0.5s ease;
   width: 100vw;
+  transition: all 0.3s ease;
 }
 
+.header.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+}
+
+.header.scrolled .nav-wrapper {
+  padding: 15px 0;
+}
 @keyframes slideDown {
   from {
     transform: translateY(-100%);
@@ -34,26 +46,54 @@
   position: relative;
 }
 
+/* LOGO — Clean & Premium Hover Only (No Floating) */
 .logo {
   display: flex;
   align-items: center;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: 6px 0;
+  position: relative;
   z-index: 1001;
 }
 
+/* Subtle glow ring on hover only */
+.logo::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.logo:hover::before {
+  opacity: 1;
+  transform: scale(1.4);
+}
+
+/* Smooth lift + slight scale */
 .logo:hover {
-  transform: scale(1.05);
+  transform: translateY(-3px);
 }
 
 .logo-image {
   height: 50px;
   width: auto;
-  transition: transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.08));
 }
 
+/* Only animate on hover — no floating when idle */
 .logo:hover .logo-image {
-  transform: rotate(5deg);
+  transform: scale(1.08) translateY(-4px);
+}
+
+/* Remove any existing floating keyframes */
+.logo .logo-image,
+.logo-image {
+  animation: none !important;
 }
 
 .nav-menu {
@@ -102,15 +142,36 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #679dbd 0%, #040663 100%);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.btn-contact:hover::before {
+  left: 0;
 }
 
 .btn-contact:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  color: white;
 }
 
 .btn-contact:active {
   transform: translateY(0);
+  color: white;
 }
 /* Resources Dropdown */
 .nav-dropdown {

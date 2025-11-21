@@ -46,7 +46,19 @@ const HomePage = () => {
   const [activeIndustryModal, setActiveIndustryModal] = useState(null);
   const [activeBlogModal, setActiveBlogModal] = useState(null);
   const [contactModalOpen, setContactModalOpen] = useState(false);
+  useEffect(() => {
+  const handleScroll = () => {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  };
 
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -117,11 +129,13 @@ const HomePage = () => {
       icon: service2,
       description: 'Advanced security solutions to protect your digital assets and ensure business continuity.',
     },
+    
     {
       title: 'Cloud and Infrastructure Services',
       icon: service3,
       description: 'Scalable cloud infrastructure designed to grow with your business needs.',
     },
+    
     {
       title: 'Security Assessments and compliance',
       icon: service4,
@@ -372,13 +386,21 @@ const HomePage = () => {
     },
   ];
 
+  // Define logos array for auto-scroll
+  const companyLogos = [
+    { src: "https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg", alt: "Airbnb" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg", alt: "HubSpot" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg", alt: "Google" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg", alt: "Microsoft" },
+    { src: walmartLogo, alt: "Walmart" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/9/9d/FedEx_Express.svg", alt: "FedEx" },
+  ];
+
   return (
     <div className="website-container">
       {/* Header */}
       <header className="header">
-        
-          <Navbar openContactModal={openContactModal} />
-       
+        <Navbar openContactModal={openContactModal} />
       </header>
 
       {/* Hero Section */}
@@ -399,28 +421,16 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Logos Section */}
+      {/* Logos Section - Auto-scrolling */}
       <section className="logos-section">
         <div className="container-full">
           <div className="logos-container">
-            <div className="logo-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg" alt="Airbnb" />
-            </div>
-            <div className="logo-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg" alt="HubSpot" />
-            </div>
-            <div className="logo-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" />
-            </div>
-            <div className="logo-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" />
-            </div>
-            <div className="logo-item">
-              <img src={walmartLogo} alt="Walmart" />
-            </div>
-            <div className="logo-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/FedEx_Express.svg" alt="FedEx" />
-            </div>
+            {/* Duplicate logos for infinite scroll effect */}
+            {[...companyLogos, ...companyLogos].map((logo, index) => (
+              <div key={index} className="logo-item">
+                <img src={logo.src} alt={logo.alt} />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -459,7 +469,11 @@ const HomePage = () => {
               ×
             </button>
             <div className="modal-header">
-            
+              <div className="modal-icon-wrapper">
+                <img src={services[activeServiceModal].icon} alt={services[activeServiceModal].title} className="modal-icon-img" />
+              </div>
+              <h3 className="modal-title">{services[activeServiceModal].title}</h3>
+              <p className="modal-description">{services[activeServiceModal].description}</p>
             </div>
             <div className="modal-content">
               <ul className="modal-details-list">
@@ -645,9 +659,9 @@ const HomePage = () => {
                 <h4 className="blog-title">{blog.title}</h4>
                 <div className="blog-meta">
                   <div className="blog-author">
-                     <div className="author-avatar">
-    <img src={blog.authorImage} alt={blog.author} className="author-avatar-img" />
-  </div>
+                    <div className="author-avatar">
+                      <img src={blog.authorImage} alt={blog.author} className="author-avatar-img" />
+                    </div>
                     <span className="author-name">{blog.author}</span>
                   </div>
                   <span className="blog-date">{blog.date}</span>
@@ -667,16 +681,15 @@ const HomePage = () => {
             </button>
             <div className="blog-modal-header">
               <div className="blog-modal-image">
-                   <img src={blogs[activeBlogModal].image} alt={blogs[activeBlogModal].title} className="blog-modal-image-img" />
+                <img src={blogs[activeBlogModal].image} alt={blogs[activeBlogModal].title} className="blog-modal-image-img" />
               </div> 
-             <h2 className="blog-modal-title">{blogs[activeBlogModal].title}</h2>
+              <h2 className="blog-modal-title">{blogs[activeBlogModal].title}</h2>
               <div className="blog-modal-meta">
                 <div className="blog-modal-author-info">
-    <img src={blogs[activeBlogModal].authorImage} alt={blogs[activeBlogModal].author} className="blog-modal-author-img" />
-    <span className="blog-modal-author">By {blogs[activeBlogModal].author}</span>
-                    <span className="blog-modal-date">{blogs[activeBlogModal].date}</span>
-
-  </div>
+                  <img src={blogs[activeBlogModal].authorImage} alt={blogs[activeBlogModal].author} className="blog-modal-author-img" />
+                  <span className="blog-modal-author">By {blogs[activeBlogModal].author}</span>
+                  <span className="blog-modal-date">{blogs[activeBlogModal].date}</span>
+                </div>
               </div>
             </div>
             <div className="blog-modal-content" dangerouslySetInnerHTML={{ __html: blogs[activeBlogModal].content }} />
@@ -699,6 +712,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      
 
       {/* Contact Modal */}
       {contactModalOpen && (
