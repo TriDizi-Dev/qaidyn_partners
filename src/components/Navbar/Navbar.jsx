@@ -7,38 +7,58 @@ const Navbar = ({ openContactModal }) => {  // Add this prop
   const [activeSection, setActiveSection] = useState('home');
   const [resourcesDropdownOpen, setResourcesDropdownOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'services', 'industries', 'blogs', 'promotions'];
-      const scrollPosition = window.scrollY + 100;
+  const [openSubmenus, setOpenSubmenus] = useState({});
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetBottom = offsetTop + element.offsetHeight;
-
-          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (e, sectionId) => {
-    e.preventDefault();
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setMobileMenuOpen(false);
-      setResourcesDropdownOpen(false);
-    }
+  // Service submenu data
+  const serviceSubmenus = {
+    'managed-it': [
+      { name: 'Helpdesk', link: '/services/helpdesk' },
+      { name: 'Devices setup and configuration', link: '/services/devices-setup' },
+      { name: 'Patch Management', link: '/services/patch-management' },
+      { name: 'Network Management', link: '/services/network-management' },
+      { name: 'Backup', link: '/services/backup' },
+      { name: 'Vendor Co-ordination', link: '/services/vendor-coordination' }
+    ],
+    'managed-security': [
+      { name: 'Threat Detection', link: '/services/threat-detection' },
+      { name: 'End Point and Network protection', link: '/services/endpoint-protection' },
+      { name: 'Incident Response', link: '/services/incident-response' },
+      { name: 'Continuous Security Monitoring', link: '/services/security-monitoring' }
+    ],
+    'cloud-infrastructure': [
+      { name: 'Cloud Setup and Migration', link: '/services/cloud-migration' },
+      { name: 'Virtual Private Servers', link: '/services/vps' },
+      { name: 'Virtual Desktops', link: '/services/virtual-desktops' },
+      { name: 'IT Infrastructure and planning', link: '/services/infrastructure-planning' }
+    ],
+    'security-assessments': [
+      { name: 'ISO 27001 Assessment and Audit', link: '/services/iso-27001' },
+      { name: 'iRAP Assessment and Audit', link: '/services/irap' },
+      { name: 'SOC2 Assessment and Audit', link: '/services/soc2' },
+      { name: 'Risk Management', link: '/services/risk-management' },
+      { name: 'Policy Development', link: '/services/policy-development' },
+      { name: 'Security Awareness Training', link: '/services/security-training' }
+    ],
+    'data-protection': [
+      { name: 'Backup', link: '/services/data-backup' },
+      { name: 'Disaster Recovery', link: '/services/disaster-recovery' },
+      { name: 'Ransomware Recovery', link: '/services/ransomware-recovery' },
+      { name: 'Encryption', link: '/services/encryption' }
+    ]
   };
+
+  const toggleSubmenu = (submenuKey) => {
+  setOpenSubmenus(prev => {
+    // If the same submenu is clicked, toggle it
+    if (prev[submenuKey]) {
+      return {};
+    }
+
+    // Otherwise close all and open only this one
+    return { [submenuKey]: true };
+  });
+};
+
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -68,8 +88,7 @@ const Navbar = ({ openContactModal }) => {  // Add this prop
               <span></span>
             </span>
           </button>
-
-          <nav className={`nav-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+ <nav className={`nav-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
   <a href="/" className="nav-link">
     Home
   </a>
@@ -83,21 +102,65 @@ const Navbar = ({ openContactModal }) => {  // Add this prop
       <span className={`dropdown-arrow ${servicesDropdownOpen ? 'open' : ''}`}>▼</span>
     </button>
     <div className={`dropdown-menu ${servicesDropdownOpen ? 'show' : ''}`}>
-      <a href="/managed-it-services" className="dropdown-item">
+      <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('managed-it')}>
         Managed IT Services
-      </a>
-      <a href="/managed-security-services" className="dropdown-item">
+        <span className={`submenu-arrow ${openSubmenus['managed-it'] ? 'open' : ''}`}>▶</span>
+      </div>
+      <div className={`submenu ${openSubmenus['managed-it'] ? 'show' : ''}`}>
+        {serviceSubmenus['managed-it'].map((item, index) => (
+          <a key={index} href={item.link} className="submenu-item">
+            {item.name}
+          </a>
+        ))}
+      </div>
+
+      <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('managed-security')}>
         Managed Security Services
-      </a>
-      <a href="/cloud-infrastructure" className="dropdown-item">
+        <span className={`submenu-arrow ${openSubmenus['managed-security'] ? 'open' : ''}`}>▶</span>
+      </div>
+      <div className={`submenu ${openSubmenus['managed-security'] ? 'show' : ''}`}>
+        {serviceSubmenus['managed-security'].map((item, index) => (
+          <a key={index} href={item.link} className="submenu-item">
+            {item.name}
+          </a>
+        ))}
+      </div>
+
+      <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('cloud-infrastructure')}>
         Cloud and Infrastructure services
-      </a>
-      <a href="/security-assessments" className="dropdown-item">
+        <span className={`submenu-arrow ${openSubmenus['cloud-infrastructure'] ? 'open' : ''}`}>▶</span>
+      </div>
+      <div className={`submenu ${openSubmenus['cloud-infrastructure'] ? 'show' : ''}`}>
+        {serviceSubmenus['cloud-infrastructure'].map((item, index) => (
+          <a key={index} href={item.link} className="submenu-item">
+            {item.name}
+          </a>
+        ))}
+      </div>
+
+      <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('security-assessments')}>
         Security Assessments and compliance
-      </a>
-      <a href="/data-protection" className="dropdown-item">
+        <span className={`submenu-arrow ${openSubmenus['security-assessments'] ? 'open' : ''}`}>▶</span>
+      </div>
+      <div className={`submenu ${openSubmenus['security-assessments'] ? 'show' : ''}`}>
+        {serviceSubmenus['security-assessments'].map((item, index) => (
+          <a key={index} href={item.link} className="submenu-item">
+            {item.name}
+          </a>
+        ))}
+      </div>
+
+      <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('data-protection')}>
         Data Protection and Recovery
-      </a>
+        <span className={`submenu-arrow ${openSubmenus['data-protection'] ? 'open' : ''}`}>▶</span>
+      </div>
+      <div className={`submenu ${openSubmenus['data-protection'] ? 'show' : ''}`}>
+        {serviceSubmenus['data-protection'].map((item, index) => (
+          <a key={index} href={item.link} className="submenu-item">
+            {item.name}
+          </a>
+        ))}
+      </div>
     </div>
   </div>
 
