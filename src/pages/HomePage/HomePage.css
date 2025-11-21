@@ -1647,3 +1647,102 @@ body {
     height: 280px;
   }
 }
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container-full {
+    padding: 0 40px;
+  }
+
+  .cta-text {
+    padding: 60px 40px;
+  }
+
+  .hero-content,
+  .stats-content,
+  .process-content,
+  .cta-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .industries-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .blogs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cta-illustration-img {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-full {
+    padding: 0 20px;
+  }
+
+  .cta-text {
+    padding: 40px 20px;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+  
+  .hero-title {
+    font-size: 36px;
+  }
+  
+  .hero-illustration {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  .services-grid,
+  .industries-grid,
+  .blogs-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-illustration-img {
+    width: 280px;
+    height: 280px;
+  }
+  
+  /* Fix blog modal image on mobile */
+  .blog-modal-image {
+    height: 200px;
+  }
+  
+  .blog-modal-image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Fix modal close button alignment on mobile */
+  .modal-close {
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+    z-index: 10;
+  }
+}
