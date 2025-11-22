@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import LOGO from '../../assets/LOGO.png';
 
-const Navbar = ({ openContactModal }) => {  // Add this prop
+const Navbar = ({ openContactModal }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [resourcesDropdownOpen, setResourcesDropdownOpen] = useState(false);
@@ -47,25 +47,63 @@ const Navbar = ({ openContactModal }) => {  // Add this prop
     ]
   };
 
-  const toggleSubmenu = (submenuKey) => {
-  setOpenSubmenus(prev => {
-    // If the same submenu is clicked, toggle it
-    if (prev[submenuKey]) {
-      return {};
-    }
-
-    // Otherwise close all and open only this one
-    return { [submenuKey]: true };
-  });
-};
-
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+  // RESET EVERYTHING
+  const closeAllMenus = () => {
+    setMobileMenuOpen(false);
+    setServicesDropdownOpen(false);
+    setResourcesDropdownOpen(false);
+    setOpenSubmenus({});
   };
 
+  // Close all when resizing to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) closeAllMenus();
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const toggleSubmenu = (submenuKey) => {
+    setOpenSubmenus(prev => {
+      // If the same submenu is clicked, close it
+      if (prev[submenuKey]) {
+        return {};
+      }
+      // Otherwise close all and open only this one
+      return { [submenuKey]: true };
+    });
+  };
+
+  const toggleMobileMenu = () => {
+    if (mobileMenuOpen) {
+      closeAllMenus();
+    } else {
+      setMobileMenuOpen(true);
+    }
+  };
+
+  // Toggle Services Dropdown - explicit open/close
+  const toggleServicesDropdown = () => {
+    if (servicesDropdownOpen) {
+      setServicesDropdownOpen(false);
+      setOpenSubmenus({});
+    } else {
+      setServicesDropdownOpen(true);
+      setResourcesDropdownOpen(false);
+      setOpenSubmenus({});
+    }
+  };
+
+  // Toggle Resources Dropdown - explicit open/close
   const toggleResourcesDropdown = () => {
-    setResourcesDropdownOpen(!resourcesDropdownOpen);
+    if (resourcesDropdownOpen) {
+      setResourcesDropdownOpen(false);
+    } else {
+      setResourcesDropdownOpen(true);
+      setServicesDropdownOpen(false);
+      setOpenSubmenus({});
+    }
   };
 
   return (
@@ -88,110 +126,116 @@ const Navbar = ({ openContactModal }) => {  // Add this prop
               <span></span>
             </span>
           </button>
- <nav className={`nav-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
-  <a href="/" className="nav-link">
-    Home
-  </a>
-  
-  <div className="nav-dropdown">
-    <button 
-      className="nav-link dropdown-toggle"
-      onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-    >
-      Services
-      <span className={`dropdown-arrow ${servicesDropdownOpen ? 'open' : ''}`}>▼</span>
-    </button>
-    <div className={`dropdown-menu ${servicesDropdownOpen ? 'show' : ''}`}>
-      <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('managed-it')}>
-        Managed IT Services
-        <span className={`submenu-arrow ${openSubmenus['managed-it'] ? 'open' : ''}`}>▶</span>
-      </div>
-      <div className={`submenu ${openSubmenus['managed-it'] ? 'show' : ''}`}>
-        {serviceSubmenus['managed-it'].map((item, index) => (
-          <a key={index} href={item.link} className="submenu-item">
-            {item.name}
-          </a>
-        ))}
-      </div>
 
-      <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('managed-security')}>
-        Managed Security Services
-        <span className={`submenu-arrow ${openSubmenus['managed-security'] ? 'open' : ''}`}>▶</span>
-      </div>
-      <div className={`submenu ${openSubmenus['managed-security'] ? 'show' : ''}`}>
-        {serviceSubmenus['managed-security'].map((item, index) => (
-          <a key={index} href={item.link} className="submenu-item">
-            {item.name}
-          </a>
-        ))}
-      </div>
+          <nav className={`nav-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+            <a href="/" className="nav-link" onClick={closeAllMenus}>
+              Home
+            </a>
+            
+            <div className="nav-dropdown">
+              <button 
+                className="nav-link dropdown-toggle"
+                onClick={toggleServicesDropdown}
+              >
+                Services
+                <span className={`dropdown-arrow ${servicesDropdownOpen ? 'open' : ''}`}>▼</span>
+              </button>
+              <div className={`dropdown-menu ${servicesDropdownOpen ? 'show' : ''}`}>
+                <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('managed-it')}>
+                  Managed IT Services
+                  <span className={`submenu-arrow ${openSubmenus['managed-it'] ? 'open' : ''}`}>▶</span>
+                </div>
+                <div className={`submenu ${openSubmenus['managed-it'] ? 'show' : ''}`}>
+                  {serviceSubmenus['managed-it'].map((item, index) => (
+                    <a key={index} href={item.link} className="submenu-item" onClick={closeAllMenus}>
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
 
-      <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('cloud-infrastructure')}>
-        Cloud and Infrastructure services
-        <span className={`submenu-arrow ${openSubmenus['cloud-infrastructure'] ? 'open' : ''}`}>▶</span>
-      </div>
-      <div className={`submenu ${openSubmenus['cloud-infrastructure'] ? 'show' : ''}`}>
-        {serviceSubmenus['cloud-infrastructure'].map((item, index) => (
-          <a key={index} href={item.link} className="submenu-item">
-            {item.name}
-          </a>
-        ))}
-      </div>
+                <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('managed-security')}>
+                  Managed Security Services
+                  <span className={`submenu-arrow ${openSubmenus['managed-security'] ? 'open' : ''}`}>▶</span>
+                </div>
+                <div className={`submenu ${openSubmenus['managed-security'] ? 'show' : ''}`}>
+                  {serviceSubmenus['managed-security'].map((item, index) => (
+                    <a key={index} href={item.link} className="submenu-item" onClick={closeAllMenus}>
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
 
-      <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('security-assessments')}>
-        Security Assessments and compliance
-        <span className={`submenu-arrow ${openSubmenus['security-assessments'] ? 'open' : ''}`}>▶</span>
-      </div>
-      <div className={`submenu ${openSubmenus['security-assessments'] ? 'show' : ''}`}>
-        {serviceSubmenus['security-assessments'].map((item, index) => (
-          <a key={index} href={item.link} className="submenu-item">
-            {item.name}
-          </a>
-        ))}
-      </div>
+                <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('cloud-infrastructure')}>
+                  Cloud and Infrastructure services
+                  <span className={`submenu-arrow ${openSubmenus['cloud-infrastructure'] ? 'open' : ''}`}>▶</span>
+                </div>
+                <div className={`submenu ${openSubmenus['cloud-infrastructure'] ? 'show' : ''}`}>
+                  {serviceSubmenus['cloud-infrastructure'].map((item, index) => (
+                    <a key={index} href={item.link} className="submenu-item" onClick={closeAllMenus}>
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
 
-      <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('data-protection')}>
-        Data Protection and Recovery
-        <span className={`submenu-arrow ${openSubmenus['data-protection'] ? 'open' : ''}`}>▶</span>
-      </div>
-      <div className={`submenu ${openSubmenus['data-protection'] ? 'show' : ''}`}>
-        {serviceSubmenus['data-protection'].map((item, index) => (
-          <a key={index} href={item.link} className="submenu-item">
-            {item.name}
-          </a>
-        ))}
-      </div>
-    </div>
-  </div>
+                <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('security-assessments')}>
+                  Security Assessments and compliance
+                  <span className={`submenu-arrow ${openSubmenus['security-assessments'] ? 'open' : ''}`}>▶</span>
+                </div>
+                <div className={`submenu ${openSubmenus['security-assessments'] ? 'show' : ''}`}>
+                  {serviceSubmenus['security-assessments'].map((item, index) => (
+                    <a key={index} href={item.link} className="submenu-item" onClick={closeAllMenus}>
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
 
-  <a href="/industries" className="nav-link">
-    Industries
-  </a>
-  
-  <div className="nav-dropdown">
-    <button 
-      className="nav-link dropdown-toggle"
-      onClick={toggleResourcesDropdown}
-    >
-      Resources
-      <span className={`dropdown-arrow ${resourcesDropdownOpen ? 'open' : ''}`}>▼</span>
-    </button>
-    <div className={`dropdown-menu ${resourcesDropdownOpen ? 'show' : ''}`}>
-      <a href="/blogs" className="dropdown-item">
-        Blogs
-      </a>
-      <a href="/guidelines" className="dropdown-item">
-        Guidelines
-      </a>
-      <a href="/case-studies" className="dropdown-item">
-        Case Studies
-      </a>
-    </div>
-  </div>
+                <div className="dropdown-item has-submenu" onClick={() => toggleSubmenu('data-protection')}>
+                  Data Protection and Recovery
+                  <span className={`submenu-arrow ${openSubmenus['data-protection'] ? 'open' : ''}`}>▶</span>
+                </div>
+                <div className={`submenu ${openSubmenus['data-protection'] ? 'show' : ''}`}>
+                  {serviceSubmenus['data-protection'].map((item, index) => (
+                    <a key={index} href={item.link} className="submenu-item" onClick={closeAllMenus}>
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
 
-  <button className="btn-contact mobile-contact" onClick={openContactModal}>Contact Us</button>
-</nav>
-          <button className="btn-contact desktop-contact" onClick={openContactModal}>Contact Us</button>
+            <a href="/industries" className="nav-link" onClick={closeAllMenus}>
+              Industries
+            </a>
+            
+            <div className="nav-dropdown">
+              <button 
+                className="nav-link dropdown-toggle"
+                onClick={toggleResourcesDropdown}
+              >
+                Resources
+                <span className={`dropdown-arrow ${resourcesDropdownOpen ? 'open' : ''}`}>▼</span>
+              </button>
+              <div className={`dropdown-menu ${resourcesDropdownOpen ? 'show' : ''}`}>
+                <a href="/blogs" className="dropdown-item" onClick={closeAllMenus}>
+                  Blogs
+                </a>
+                <a href="/guidelines" className="dropdown-item" onClick={closeAllMenus}>
+                  Guidelines
+                </a>
+                <a href="/case-studies" className="dropdown-item" onClick={closeAllMenus}>
+                  Case Studies
+                </a>
+              </div>
+            </div>
+
+            <button className="btn-contact mobile-contact" onClick={() => { closeAllMenus(); openContactModal(); }}>
+              Contact Us
+            </button>
+          </nav>
+
+          <button className="btn-contact desktop-contact" onClick={openContactModal}>
+            Contact Us
+          </button>
         </div>
       </div>
     </header>
