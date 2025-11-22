@@ -261,15 +261,14 @@ const Navbar = ({ openContactModal }) => {
                 </a>
               </div>
             </div>
-
-            <button className="btn-contact mobile-contact" onClick={openContactModal}>
-              Contact Us
-            </button>
+<a href="/contact" className="btn-contact mobile-contact">
+  Contact Us
+</a>
           </nav>
           
-          <button className="btn-contact desktop-contact" onClick={openContactModal}>
-            Contact Us
-          </button>
+          <a href="/contact" className="btn-contact desktop-contact">
+  Contact Us
+</a>
         </div>
       </div>
     </header>

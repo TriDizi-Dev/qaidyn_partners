@@ -400,7 +400,7 @@ const HomePage = () => {
     <div className="website-container">
       {/* Header */}
       <header className="header">
-        <Navbar openContactModal={openContactModal} />
+        <Navbar  />
       </header>
 
       {/* Hero Section */}
@@ -605,7 +605,7 @@ const HomePage = () => {
               <p className="process-description">
                 A streamlined approach to delivering exceptional IT solutions. From initial consultation to full implementation, we're with you every step of the way.
               </p>
-              <button className="btn-primary" onClick={openContactModal}>Get Started</button>
+              <a href="/contact" className="btn-primary">Get Started</a>
             </div>
             <div className="process-steps">
               <div className="process-step">
@@ -705,7 +705,9 @@ const HomePage = () => {
             <p className="cta-description">
               Partner with us to unlock the full potential of your digital infrastructure. Let's build something amazing together.
             </p>
-            <button className="btn-secondary" onClick={openContactModal}>Get in Touch</button>
+            
+            <a href="/contact" className="btn-secondary">Get in Touch</a>
+
           </div>
           <div className="cta-image">
             <img src={image2} alt="Team Collaboration" className="cta-illustration-img" />
