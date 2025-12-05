@@ -6,7 +6,7 @@ import "./HelpdeskSupport.css";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import Footer from "../../components/Footer/footer.jsx";
 
-import { servicesData } from "../../data/servicesData";
+import { servicesData } from "../Services/servicesData.js";
 
 const ServicePage = () => {
   const { category, slug } = useParams();
