@@ -6,7 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./HelpdeskSupport.css";
 
 import Navbar from "../../components/Navbar/Navbar.jsx";
-import Footer from "../../components/Footer/Footer.jsx";
+import Footer from "../../components/Footer/footer.jsx";
 
 import { servicesData } from "../../data/servicesData";
 
