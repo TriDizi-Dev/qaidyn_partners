@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8vw 6vw;
+  padding: 10vw 6vw 6vw;
   gap: 3vw;
 }
 
@@ -76,5 +76,456 @@
   .cloud-image {
     width: 100%;
     margin-top: 6vw;
+  }
+   .success-process-section {
+    flex-direction: column;
+    padding: 6vw 5vw;
+    gap: 4vw;
+  }
+
+  .success-left,
+  .process-right {
+    width: 100%;
+  }
+
+  .success-title {
+    font-size: 7.5vw;
+    text-align: left;
+  }
+
+  .success-sub {
+    font-size: 3.2vw;
+    margin-bottom: 3vw;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+  }
+
+  .stat-text .stat-number {
+    font-size: 1rem;
+  }
+
+  .process-heading {
+    font-size: 5.5vw;
+  }
+
+  .process-desc {
+    font-size: 3.2vw;
+  }
+
+  .process-card {
+    padding: 0.9rem;
+  }
+
+  .card-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 1.1rem;
+  }
+
+  .cta-btn {
+    width: 160px;
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}
+
+.success-process-section {
+  max-width: 80vw;
+  margin: 2vw auto 6vw;
+}
+
+/* LEFT: big heading + stats */
+.success-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  /* border: 1px solid red; */
+  gap: 10vw;
+  margin-bottom: 2vw;
+}
+
+.success-title {
+  font-size: 2.2rem; /* larger and bold */
+  color: #06222f;
+  margin: 0 0 0.6rem 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.success-sub {
+  color: #6b7a7b;
+  margin-bottom: 1.8rem;
+}
+
+/* grid of small stat blocks (2x2) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stat-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(2, 25, 74, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-text .stat-number {
+  font-weight: 800;
+  color: #02194a;
+  font-size: 1.8rem;
+  text-align: left;
+}
+
+.stat-text .stat-label {
+  font-size: 0.85rem;
+  color: #5d6b6e;
+  margin-top: 0.15rem;
+}
+
+/* RIGHT: process cards column */
+.process-right {
+display: flex;
+flex-direction: row;
+gap: 20vw;
+margin-left: 2vw;
+margin-top: 5vw;
+}
+
+.process-heading {
+  font-size: 2.2rem; /* larger and bold */
+  color: #06222f;
+  margin: 0 0 0.6rem 0;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.process-desc {
+  color: #657670;
+  margin-bottom: 1.2rem;
+  width: 28vw;
+}
+
+/* stacked cards */
+.process-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.process-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(2, 25, 74, 0.06);
+  border: 1px solid rgba(2, 25, 74, 0.03);
+}
+
+.card-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 61, 52, 0.06);
+  font-size: 1.25rem;
+}
+
+.card-content .card-title {
+  font-weight: 700;
+  color: #0b2b2a;
+  margin-bottom: 0.25rem;
+}
+
+.card-content .card-text {
+  color: #6a7b7a;
+  font-size: 0.92rem;
+}
+
+/* CTA button */
+.cta-btn {
+  background: linear-gradient(90deg, #7b57f5 0%, #5f3be9 100%);
+  color: #fff;
+  border: none;
+  padding: 0.85rem 1.4rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(123, 87, 245, 0.18);
+}
+
+/* small screens */
+@media (max-width: 1024px) {
+  .success-process-section {
+    padding: 5vw;
+    gap: 3vw;
+  }
+
+  .success-title {
+    font-size: 2rem;
+  }
+}/* container must be relative to position the line images */
+.blue_connection_section {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5vw;
+  padding: 1vw;
+  margin-bottom: 2vw;
+  margin-top: -3vw;
+}
+
+/* cards & center logo (kept similar to your existing styles) */
+.blue_box {
+  background: #D5FAFC;
+  width: 23vw;
+  padding: 1vw 1vw;
+  border-radius: 12px;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+}
+
+.box1 { margin-top: 5vw; }
+.box2 { margin-top: 10vw; }
+
+/* center logo */
+.middle_logo_box { position: relative; z-index: 4; margin-top: 5vw; }
+.blue_bg { width: 20vw; display:block; }
+.middle_logo {
+  position: absolute;
+  top: 0vw;
+  left: 0vw;
+  width: 18vw;
+  z-index: 6;
+}
+
+/* bottom card positioned absolutely so lines can connect */
+.box3 {
+  position: absolute;
+  left: 48.6%;
+  transform: translateX(20%);
+  bottom: -18vw;
+  width: 24vw;
+  z-index: 5;
+}
+
+/* -----------------------------
+   Line images
+   ----------------------------- */
+.line-img {
+  position: absolute;
+  z-index: 3;             
+  pointer-events: none;  
+  object-fit: contain;
+  transform-origin: top left;
+  transition: none;
+}
+
+.line1-img {
+  top: 5.4vw;
+  left: 51.3vw;
+  width: 23.6vw;   /* adjust scale to match design */
+  transform: rotate(0deg);
+  z-index: 13;
+}
+
+/* line2: vertical/horizontal segment near centre (e.g. turning down) */
+.line2-img {
+  top: 20vw;
+  left: 22vw;
+  width: 18vw;   /* if this image is vertical, use height instead */
+  transform: rotate(0deg);
+  z-index: 13;
+}
+
+/* line3: lower connection from centre down to bottom box */
+.line3-img {
+  top: 24vw;
+  left: 46vw;
+  width: 7vw;
+  transform: rotate(0deg);
+  z-index: 13;
+}
+
+/* MOBILE adjustments */
+@media (max-width: 768px) {
+  .blue_connection_section {
+    flex-direction: column;
+    align-items: center;
+    padding: 6vw 4vw;
+    gap: 6vw;
+  }
+
+  .blue_box {
+    width: 86%;
+    padding: 4vw;
+  }
+
+  .middle_logo_box .blue_bg { width: 60vw; }
+  .middle_logo { width: 36vw; top: 6vw; left: 12vw; }
+
+  .box3 { position: relative; transform: none; bottom: 0; left: auto; width: 86%; }
+
+  /* scale and reposition line images for mobile */
+  .line1-img {
+    top: 10vw;
+    left: 6vw;
+    width: 34vw;
+    transform: rotate(0deg);
+  }
+  .line2-img {
+    top: 6vw;
+    left: 40vw;
+    width: 30vw;
+  }
+  .line3-img {
+    top: 36vw;
+    left: 14vw;
+    width: 34vw;
+  }
+}
+
+/* ---------- Join-the-team banner ---------- */
+.aboutus_last_container {
+  width: 94%;
+  height: 13vw;
+  margin-top: 25vw;
+  text-align: center;
+  margin-left: 3vw;
+  background: #17b2b0; /* main teal background */
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 2vw 0vw;
+  margin-bottom: 5vw;
+}
+
+.aboutus_last_inner {
+  width: 100%;
+  max-width: 1200px;     /* limits content width on large screens */
+  text-align: center;
+  color: #ffffff;
+  padding: 0 1rem;
+}
+
+/* Title */
+.join-title {
+  margin: 0;
+  font-size: 1.75rem;    /* desktop title */
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #ffffff;
+}
+
+/* Subtitle / small copy */
+.join-sub {
+  margin: .5rem 0 1.25rem;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.92);
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+.join-btn {
+  display: inline-block;
+  border: none;
+  background: #ffffff;
+  color: #6a47e6;           /* purple text color */
+  padding: 0.55rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(27, 14, 62, 0.08);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+/* subtle hover */
+.join-btn:hover,
+.join-btn:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(27, 14, 62, 0.12);
+  outline: none;
+}
+
+/* small rounded focus ring for accessibility */
+.join-btn:focus-visible {
+  box-shadow: 0 0 0 4px rgba(106,71,230,0.14), 0 12px 28px rgba(27,14,62,0.12);
+}
+
+/* ---------- Responsive: tablet & mobile ---------- */
+@media (max-width: 900px) {
+  .aboutus_last_container {
+    padding: 3rem 1rem;
+  }
+
+  .join-title {
+    font-size: 1.5rem;
+  }
+
+  .join-sub {
+    font-size: 0.95rem;
+  }
+
+  .join-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutus_last_container {
+    padding: 3.2rem 1rem;
+  }
+
+  .aboutus_last_inner {
+    padding: 0 0.6rem;
+  }
+
+  .join-title {
+    font-size: 1.15rem;
+    line-height: 1.2;
+  }
+
+  .join-sub {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .join-btn {
+    width: 170px;   
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
   }
 }
