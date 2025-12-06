@@ -1,0 +1,254 @@
+.guidelines-container {
+  margin: 8vw 3vw 3vw 5vw;
+}
+
+.guidelinesheading {
+  text-align: center;
+  width: 90vw;
+  margin-bottom: 3vw;
+}
+
+.guidelinesHeading h1 {
+  font-size: 2.5rem;
+}
+
+.guidelinesheading p {
+  font-size: 1.1rem;
+  color: #555;
+  width: 70vw;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.guidelines_timeline {
+  position: relative;
+  padding-left: 60px;
+  margin-left: 10vw;
+}
+
+.guidelines_timeline::before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #ddd;
+  border-radius: 2px;
+}
+
+.guidelines_timeline-item {
+position: relative;
+  display: flex;
+  width: 70vw;
+  margin-bottom: 3vw;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.guidelines_timeline-marker {
+  position: absolute;
+  left: -55px;
+  width: 50px;
+  height: 50px;
+  background: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  z-index: 1;
+}
+
+.guidelines_timeline-marker .guidelinesnumber {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.guidelines_timeline-content {
+background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  width: 100%;
+  margin-left: 30px;
+  transition: all 0.4s ease;
+}
+
+.guidelines_timeline-content h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 12px;
+}
+
+.guidelines_timeline-content.active-content {
+  border: 2px solid #007bff;
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+  transform: translateY(-8px);
+}
+
+.guidelines_tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.guidelines_tag {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.guidelines_tag.level {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.guidelines_tag.channel {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.guidelines_tag.medium {
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.guidelines_timeline-content p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.guidelines_number {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: font-size 0.4s ease;
+}
+.guidelines_timeline-marker.active-marker .guidelines_number {
+  font-size: 2rem;
+}
+.guidelines_timeline-marker {
+position: absolute;
+  left: -49px;
+  width: 40px;
+  height: 40px;
+  background: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+/* Optional: Pulse effect on active */
+.guidelines_timeline-item.active .guidelines_timeline-marker::after {
+  content: '';
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: rgba(0, 123, 255, 0.3);
+  animation: pulse 2s infinite;
+}
+.guidelines_timeline-marker.active-marker {
+  width: 60px;
+  height: 60px;
+  background: #0056b3;
+  box-shadow: 0 8px 25px rgba(0, 86, 179, 0.5);
+  left: -57px;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .guidelines-container {
+    padding: 15px;
+  }
+
+  .guidelinesheading h1 {
+    font-size: 2rem;
+  }
+
+  .guidelinesheading p {
+    font-size: 1rem;
+  }
+
+  .guidelines_timeline {
+    padding-left: 40px;
+  }
+
+  .guidelines_timeline::before {
+    left: 20px;
+  }
+
+  .guidelines_timeline-marker {
+    left: -40px;
+    width: 50px;
+    height: 50px;
+  }
+
+.guidelines_timeline-marker.active-marker .guidelines_number {
+    font-size: 1.8rem;
+  }
+
+  .guidelines_timeline-content {
+    margin-left: 15px;
+    padding: 18px;
+  }
+
+  .guidelines_timeline-content {
+    margin-left: 20px;
+    padding: 18px;
+  }
+
+  .guidelines_timeline-content h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .guidelines_timeline-content {
+    padding: 16px;
+  }
+
+  .guidelines_tags {
+    gap: 8px;
+  }
+
+  .guidelines_tag {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  .guidelines_timeline-item.active .guidelines_timeline-marker {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .guidelines_timeline-item.active .guidelines_number {
+    font-size: 1.2rem !important;
+  }
+}
