@@ -333,7 +333,7 @@
   color: #6c6f73;
 }
 
-/* LOGOS SECTION */
+/* LOGOS */
 
 .cs-logos-section {
   padding: 60px 0;
@@ -612,7 +612,7 @@
   display: block;
 }
 
-/* TABLET */
+/* TABLET (also makes timeline vertical) */
 
 @media (max-width: 992px) {
   .cs-container {
@@ -635,15 +635,103 @@
   }
 
   .cs-how {
-    padding: 90px 0 80px;
+    padding: 80px 0 60px;
     height: auto;
   }
 
+  .cs-how h2 {
+    margin-top: 0;
+  }
+
   .cs-timeline {
-    margin-top: 40px;
-    transform: scale(0.9);
-    transform-origin: top center;
-    overflow-x: auto;
+    max-width: 100%;
+    height: auto;
+    margin: 40px auto 0;
+  }
+
+  .cs-timeline-bg {
+    display: none;
+  }
+
+  .cs-steps {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .cs-step {
+    position: static;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    text-align: left;
+  }
+
+  .cs-num {
+    font-size: 32px;
+    line-height: 1;
+    min-width: 32px;
+  }
+
+  .cs-dot {
+    width: 12px;
+    height: 12px;
+    margin: 4px 0 0 0;
+    border-radius: 50%;
+  }
+
+  .cs-pill {
+    margin-top: 4px;
+  }
+
+  .cs-step-desc-top,
+  .cs-step-desc-side,
+  .cs-step-desc-bottom {
+    margin-top: 4px;
+  }
+
+  .cs-step-1,
+  .cs-step-2,
+  .cs-step-3,
+  .cs-step-4 {
+    width: 100%;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin: 0;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .cs-step-1 .cs-num,
+  .cs-step-2 .cs-num,
+  .cs-step-3 .cs-num,
+  .cs-step-4 .cs-num {
+    margin: 0;
+  }
+
+  .cs-step-1 .cs-dot,
+  .cs-step-2 .cs-dot,
+  .cs-step-3 .cs-dot,
+  .cs-step-4 .cs-dot {
+    margin: 4px 0 0 0;
+    transform: none;
+  }
+
+  .cs-step-1 .cs-step-desc-top,
+  .cs-step-2 .cs-step-desc-top,
+  .cs-step-3 .cs-step-desc-side,
+  .cs-step-4 .cs-step-desc-bottom {
+    margin: 0;
+  }
+
+  .cs-step-1 .cs-pill-top,
+  .cs-step-2 .cs-pill-bottom,
+  .cs-step-3 .cs-pill-top,
+  .cs-step-4 .cs-pill-top {
+    margin: 4px 0 0 0;
   }
 
   .cs-services {
@@ -706,13 +794,6 @@
   .cs-how h2 {
     font-size: 32px;
     line-height: 42px;
-    margin-top: -20px;
-  }
-
-  .cs-timeline {
-    transform: scale(0.8);
-    transform-origin: top left;
-    overflow-x: auto;
   }
 
   .cs-services-title {
