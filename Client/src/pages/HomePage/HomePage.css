@@ -583,7 +583,7 @@ body {
 
 /* FIXED: Button animations */
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #7C3AED;
   color: white;
   border: none;
   padding: 15px 40px;
@@ -596,18 +596,7 @@ body {
   position: relative;
   overflow: hidden;
   z-index: 1;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #679dbd 0%, #040663 100%);
-  transition: left 0.4s ease;
-  z-index: -1;
+  text-decoration: none;
 }
 
 .btn-primary:hover::before {
@@ -970,6 +959,7 @@ body {
 .industries-header {
   position: relative;
   text-align: center;
+  
 }
 
 .quote-mark {
@@ -980,6 +970,8 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: 25px;
   margin-top: 50px;
+  width: 1,556px;
+  height: 1,041px;
 }
 
 .industry-card {
@@ -1129,7 +1121,7 @@ body {
 /* Process Section */
 .process-section {
   padding: 80px 0;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+  background: white;
   width: 100vw;
 }
 
@@ -1480,42 +1472,25 @@ body {
 }
 /* FIXED: Button animation */
 .btn-secondary {
-  background: linear-gradient(135deg, #1ddcf4 0%, #6c45d3 100%);
-  color: white;
+  background: #ffffff;                     /* White button */
+  color: #4f46e5;                          /* Indigo/blue text */
   border: none;
-  padding: 15px 40px;
-  border-radius: 30px;
+  padding: 14px 34px;
+  border-radius: 14px;                     /* Softer rounded edges */
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.4s ease;
-  box-shadow: 0 4px 15px rgba(109, 69, 211, 0.3);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.btn-secondary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #80f3ff 0%, #3d1a94 100%);
-  transition: left 0.4s ease;
-  z-index: -1;
-}
-
-.btn-secondary:hover::before {
-  left: 0;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  text-decoration: none;   /* Light shadow */
 }
 
 .btn-secondary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(109, 69, 211, 0.45);
-  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  color: #4338ca;                          /* Slightly darker text on hover */
 }
+
 
 
 .cta-image {
@@ -2266,4 +2241,9 @@ body {
     opacity: 1;
     transform: scale(1);
   }
+}
+.cs-services-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 32px; /* center + bottom gap */
 }

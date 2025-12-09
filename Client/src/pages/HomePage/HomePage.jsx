@@ -2,11 +2,15 @@
 import './HomePage.css';
 import Navbar from '../../components/Navbar/Navbar.jsx';
 
-
 // Hero & CTA images
 import image1 from '../../assets/image1.png';
 import image2 from '../../assets/image2.jfif';
 import walmartLogo from '../../assets/walmart.png';
+import Icon1 from '../../assets/AboutUs/aboutIcon.png';
+import Icon4 from '../../assets/AboutUs/aboutIcon4.png';
+import Icon2 from '../../assets/AboutUs/aboutIcon2.png';
+import Icon3 from '../../assets/AboutUs/aboutIcon3.png';
+
 // Icons
 import icon1 from '../../assets/icon1.png';
 import icon2 from '../../assets/icon2.png';
@@ -434,31 +438,62 @@ const HomePage = () => {
         </div>
       </section>
       
-      {/* Services Section */}
       <section className="services-section animate-on-scroll" id="services">
-        <div className="container-full">
-          <h2 className="section-title">Our Core Services</h2>
-          <p className="section-subtitle">
-            Comprehensive IT solutions designed to elevate your business operations and drive sustainable growth
-          </p>
-          <div className="services-grid">
-            {services.map((service, index) => (
-              <div 
-                key={index} 
-                className="service-card" 
-                style={{animationDelay: `${index * 0.1}s`}}
-                onClick={() => openServiceModal(index)}
-              >
-                <div className="service-icon-wrapper">
-                  <img src={service.icon} alt={service.title} className="service-icon-img" />
-                </div>
-                <h3 className="service-title">{service.title}</h3>
-                <p className="service-description">{service.description}</p>
-              </div>
-            ))}
+  <div className="container-full">
+    <div className="cs-services-header">
+      <h2 className="cs-services-title">Our Core Services</h2>
+
+      <p className="cs-sub">
+        Comprehensive IT solutions designed to elevate your business operations
+        and drive sustainable growth.
+      </p>
+    </div>
+
+    <div className="cs-services-wrapper">
+      {/* TOP ROW – first 3 services */}
+      <div className="cs-service-row">
+        {services.slice(0, 3).map((service, index) => (
+          <div
+            key={index}
+            className="cs-service-item"
+            style={{ animationDelay: `${index * 0.1}s` }}
+            onClick={() => openServiceModal(index)}
+          >
+            <img
+              src={service.icon}
+              alt={service.title}
+              className="cs-service-icon"
+            />
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+
+      {/* BOTTOM ROW – last 2 services */}
+      <div className="cs-service-row bottom">
+        {services.slice(3).map((service, index) => (
+          <div
+            key={index + 3}
+            className="cs-service-item"
+            style={{ animationDelay: `${(index + 3) * 0.1}s` }}
+            onClick={() => openServiceModal(index + 3)}
+          >
+            <img
+              src={service.icon}
+              alt={service.title}
+              className="cs-service-icon"
+            />
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
       {/* Service Details Modal */}
       {activeServiceModal !== null && (
@@ -554,46 +589,52 @@ const HomePage = () => {
       )}
 
       {/* Success Stats Section */}
-      <section className="stats-section animate-on-scroll" id="stats">
-        <div className="container-full">
-          <div className="stats-content">
-            <div className="stats-left">
-              <h2 className="stats-title">Our 10 years of Success</h2>
-              <p className="stats-subtitle">Building trust through excellence and innovation</p>
-            </div>
-            <div className="stats-grid">
-              <div className="stat-item">
-                <div className="stat-icon-wrapper">
-                  <img src={icon12} alt="Employees" className="stat-icon-img" />
-                </div>
-                <div className="stat-value">100+</div>
+            {/* Success Stats Section – exactly like Promotions page */}
+      <section className="success-process-section animate-on-scroll" id="stats">
+        <div className="success-left">
+          <div>
+            <h2 className="success-title">Our 10 years of Success</h2>
+            <p className="success-sub">
+              With our super powers we have reached this
+            </p>
+          </div>
+
+          <div className="stats-grid">
+            <div className="stat-item">
+              <img src={Icon1} alt="Employees working" />
+              <div className="stat-text">
+                <div className="stat-number">100+</div>
                 <div className="stat-label">Employees working</div>
               </div>
-              <div className="stat-item">
-                <div className="stat-icon-wrapper">
-                  <img src={icon13} alt="Data Storage" className="stat-icon-img" />
-                </div>
-                <div className="stat-value">2 Million</div>
+            </div>
+
+            <div className="stat-item">
+              <img src={Icon4} alt="Data Stored in Cloud" />
+              <div className="stat-text">
+                <div className="stat-number">2 Million</div>
                 <div className="stat-label">Data Stored in Cloud</div>
               </div>
-              <div className="stat-item">
-                <div className="stat-icon-wrapper">
-                  <img src={icon14} alt="Countries" className="stat-icon-img" />
-                </div>
-                <div className="stat-value">50+</div>
+            </div>
+
+            <div className="stat-item">
+              <img src={Icon2} alt="Countries" />
+              <div className="stat-text">
+                <div className="stat-number">50+</div>
                 <div className="stat-label">Countries</div>
               </div>
-              <div className="stat-item">
-                <div className="stat-icon-wrapper">
-                  <img src={icon15} alt="Clients" className="stat-icon-img" />
-                </div>
-                <div className="stat-value">100+</div>
+            </div>
+
+            <div className="stat-item">
+              <img src={Icon3} alt="Clients" />
+              <div className="stat-text">
+                <div className="stat-number">100+</div>
                 <div className="stat-label">Clients</div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Process Section */}
       <section className="process-section animate-on-scroll" id="process">
