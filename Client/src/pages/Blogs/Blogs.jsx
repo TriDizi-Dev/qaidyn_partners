@@ -10,8 +10,6 @@ import Navbar from "../../components/Navbar/Navbar";
 
 import ctaImg from "../../assets/promotions/freepik--Laptop--inject-23.png";
 import { useNavigate } from "react-router-dom";
-
-// ⭐ import global edit mode
 import { useEditMode } from "../../components/context/EditModeContext.jsx";
 import { database } from "../../components/Firebase/firebase.js";
 import { ref, get } from "firebase/database";
