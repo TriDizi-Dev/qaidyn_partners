@@ -7,6 +7,13 @@ import HomeFooter from "../../components/Footer1/footerHome.jsx";
 import { servicesData } from "../Services/servicesData.js";
 import { useEditMode } from "../../components/context/EditModeContext.jsx";
 
+import serviceImg0 from "../../assets/service.png";
+import serviceImg1 from "../../assets/service1.png";
+import serviceImg2 from "../../assets/service2.png";
+import serviceImg3 from "../../assets/service3.png";
+import serviceImg4 from "../../assets/service4.png";
+
+
 const ServicePage = ({ onOpenContact }) => {
   const { category, slug } = useParams();
   const { isEditMode } = useEditMode();
@@ -21,25 +28,33 @@ const ServicePage = ({ onOpenContact }) => {
   const [twoColumnImage, setTwoColumnImage] = useState(null);
   const [testimonialPhoto, setTestimonialPhoto] = useState(null);
 
+  const relatedServiceImages = [
+    serviceImg0,
+    serviceImg1,
+    serviceImg2,
+    serviceImg3,
+    serviceImg4,
+  ];
+
   const splitTitle = (title) => {
-  if (title.includes("&")) {
-    const [first, second] = title.split("&");
+    if (title.includes("&")) {
+      const [first, second] = title.split("&");
+      return {
+        first: first.trim(),
+        second: second.trim(),
+        hasAmp: true,
+      };
+    }
+
+    const words = title.split(" ");
+    const mid = Math.ceil(words.length / 2);
+
     return {
-      first: first.trim(),
-      second: second.trim(),
-      hasAmp: true,
+      first: words.slice(0, mid).join(" "),
+      second: words.slice(mid).join(" "),
+      hasAmp: false,
     };
-  }
-
-  const words = title.split(" ");
-  const mid = Math.ceil(words.length / 2);
-
-  return {
-    first: words.slice(0, mid).join(" "),
-    second: words.slice(mid).join(" "),
-    hasAmp: false,
   };
-};
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -102,7 +117,10 @@ const ServicePage = ({ onOpenContact }) => {
                 ))}
               </ul>
 
-              <p className="helpdesk-hero-desc">{hero.desc}</p>
+              <div className="helpdesk-desc-wrapper">
+    <div className="helpdesk-desc-line"></div>
+    <p className="helpdesk-hero-desc">{hero.desc}</p>
+  </div>
 
               <button
                 type="button"
@@ -135,30 +153,37 @@ const ServicePage = ({ onOpenContact }) => {
         </section>
 
         <section
-          className="helpdesk-brands"
-          contentEditable={isEditMode}
-          suppressContentEditableWarning={true}
-        >
-          <p className="helpdesk-brands-label">{brands.label}</p>
-          <img
-            src={brandsImage || brands.image}
-            alt="Trusted brands"
-            className="helpdesk-brands-img"
-          />
+  className="helpdesk-brands"
+  contentEditable={isEditMode}
+  suppressContentEditableWarning={true}
+>
+  <p className="helpdesk-brands-label">{brands.label}</p>
 
-          {isEditMode && (
-            <div className="helpdesk-image-upload">
-              <label className="helpdesk-upload-label">
-                Change Brands Image:
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange(setBrandsImage)}
-                />
-              </label>
-            </div>
-          )}
-        </section>
+  {/* 🔥 Centered container for left & right page gap */}
+  <div className="helpdesk-brands-container">
+    <div className="helpdesk-brands-scroll">
+      <img
+        src={brandsImage || brands.image}
+        alt="Trusted brands"
+        className="helpdesk-brands-img"
+      />
+    </div>
+  </div>
+
+  {isEditMode && (
+    <div className="helpdesk-image-upload">
+      <label className="helpdesk-upload-label">
+        Change Brands Image:
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange(setBrandsImage)}
+        />
+      </label>
+    </div>
+  )}
+</section>
+
 
         <section
   className="helpdesk-process"
@@ -313,20 +338,27 @@ const ServicePage = ({ onOpenContact }) => {
           </div>
         </section>
 
-        <section
-          className="helpdesk-related"
-          contentEditable={isEditMode}
-          suppressContentEditableWarning={true}
-        >
+       <section className="helpdesk-related">
           <div className="helpdesk-related-inner">
             <h2 className="helpdesk-section-title center">Related Services</h2>
 
             <div className="helpdesk-related-grid">
-              {relatedServices.map((item) => (
+              {relatedServices.map((item, index) => (
                 <div className="helpdesk-related-card" key={item.slug}>
-                  <div className="helpdesk-related-icon" />
+                  <div className="helpdesk-related-icon">
+                    <img
+                      src={
+                        relatedServiceImages[
+                          index % relatedServiceImages.length
+                        ]
+                      }
+                      alt={item.title}
+                    />
+                  </div>
+
                   <h3>{item.title}</h3>
                   <p>{item.hero?.desc}</p>
+
                   <Link
                     to={`/services/${item.category}/${item.slug}`}
                     className="helpdesk-link-btn"

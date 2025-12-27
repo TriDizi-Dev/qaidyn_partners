@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./CaseStudies.css";
 import Navbar from "../../components/Navbar/Navbar.jsx";
-import Footer from "../../components/Footer/footer.jsx";
+import HomeFooter from "../../components/Footer1/footerHome.jsx";
 import heroImg from "../../assets/casestudies/freepik--Laptop--inject-23.png";
 import testimonialImg from "../../assets/casestudies/Image (1).png";
 import ctaImg from "../../assets/casestudies/image 3.png";
@@ -269,11 +269,10 @@ const CaseStudies = ({ onOpenContact }) => {
         <div className="cs-container cs-hero-inner">
           <div className="cs-hero-left">
             <h1>
-              Want anything to be easy with <span>NetONE.</span>
+              Resources to Guide Your Growth
             </h1>
             <p>
-              Provide a network for all your needs with ease and fun using
-              NetONE. Discover interesting features from us.
+              Access curated insights, templates, and tools designed to help you make smarter, faster, and more informed decisions.
             </p>
             <button
               className="cs-btn-primary"
@@ -645,10 +644,9 @@ const CaseStudies = ({ onOpenContact }) => {
       >
         <div className="cs-container cs-cta-inner">
           <div className="cs-cta-left">
-            <h2>Lorem Ipsum content is dummy text</h2>
+            <h2>Let’s Build a Smarter, Secure IT Future Together</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              commodo ligula eget dolor.
+             Have a question or need expert support? Reach out to our team today—we’re here to provide fast, reliable guidance and the right IT solutions for your business.
             </p>
             <button
               className="cs-btn-white"
@@ -678,7 +676,7 @@ const CaseStudies = ({ onOpenContact }) => {
         </div>
       </section>
 
-      <Footer />
+      <HomeFooter />
     </div>
   );
 };

@@ -2,9 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import "./Careers.css";
 import HomeFooter from "../../components/Footer1/footerHome.jsx";
 import Navbar from "../../components/Navbar/Navbar";
-import ctaImgFile from "../../assets/promotions/freepik--Laptop--inject-23.png";
-
-// ⭐ global edit mode
+import ctaImg from "../../assets/promotions/image 3.png";
 import { useEditMode } from "../../components/context/EditModeContext.jsx";
 import { database, get } from "../../components/Firebase/firebase.js";
 import { ref } from "firebase/storage";
@@ -77,7 +75,6 @@ const uniqueValues = (arr, key) =>
 
 const Career = () => {
   const { isEditMode } = useEditMode(); // ⭐ use global edit mode
-  // const [initialJobs, setCareers] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -88,10 +85,10 @@ const Career = () => {
   const [filterLocation, setFilterLocation] = useState("All");
   const [filterLevel, setFilterLevel] = useState("All");
   const [filterType, setFilterType] = useState("All");
-  const [selectedJobId, setSelectedJobId] = useState(jobs[0]?.id ?? null);
+  const [selectedJobId, setSelectedJobId] = useState(null);
 
   // CTA image editable
-  const [ctaImage, setCtaImage] = useState(ctaImgFile);
+  const [ctaImage, setCtaImage] = useState(ctaImg);
 
   const handleCtaImageChange = (e) => {
     const file = e.target.files[0];
@@ -100,15 +97,17 @@ const Career = () => {
     setCtaImage(url);
   };
 
-  // available filter options derived from jobs
+  const onOpenContact = () => {
+    window.location.href = "/contact";
+  };
+  
   const locations = useMemo(
-    () => ["All", ...uniqueValues(jobs, "location")],
+    () => ["All location", ...uniqueValues(jobs, "location")],
     [jobs]
   );
-  const levels = useMemo(() => ["All", ...uniqueValues(jobs, "level")], [jobs]);
-  const types = useMemo(() => ["All", ...uniqueValues(jobs, "type")], [jobs]);
+  const levels = useMemo(() => ["All Experience Level", ...uniqueValues(jobs, "level")], [jobs]);
+  const types = useMemo(() => ["All Categories", ...uniqueValues(jobs, "type")], [jobs]);
 
-  // filtered jobs
   const filteredJobs = useMemo(() => {
     const q = query.trim().toLowerCase();
     return jobs.filter((job) => {
@@ -126,17 +125,11 @@ const Career = () => {
     });
   }, [jobs, query, filterLocation, filterLevel, filterType]);
 
-  // if filtered list changes, ensure a valid selected job (default to first)
   useEffect(() => {
     if (!filteredJobs.length) {
       setSelectedJobId(null);
-      return;
     }
-    const exists = filteredJobs.some((j) => j.id === selectedJobId);
-    if (!exists) {
-      setSelectedJobId(filteredJobs[0].id);
-    }
-  }, [filteredJobs, selectedJobId]);
+  }, [filteredJobs]);
 
   const selectedJob = filteredJobs.find((j) => j.id === selectedJobId) ?? null;
 
@@ -150,28 +143,6 @@ const Career = () => {
     setFilterLevel("All");
     setFilterType("All");
   };
-
-  // useEffect(() => {
-  //   const fetchCareers = async () => {
-  //     const careersRef = ref(database, "careers");
-  //     try {
-  //       const snapshot = await get(careersRef);
-  //       if (snapshot.exists()) {
-  //         const data = snapshot.val();
-  //         const careerList = Object.keys(data).map((key) => ({
-  //           id: key,
-  //           ...data[key],
-  //         }));
-  //         setCareers(careerList);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching data: ", error);
-  //     }
-  //   };
-
-  //   fetchCareers();
-  // }, []);
-
   return (
     <>
       <header className="header">
@@ -189,15 +160,20 @@ const Career = () => {
               suppressContentEditableWarning={true}
             >
               <div className="career-search-box">
-                <input
-                  aria-label="Search by role or keyword"
-                  type="text"
-                  placeholder="Search by role or keyword..."
-                  className="career-search-input career-job-search"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-              </div>
+  <span className="career-search-icon">
+    🔍
+  </span>
+
+  <input
+    aria-label="Search by role or keyword"
+    type="text"
+    placeholder="Search by role or keyword..."
+    className="career-search-input career-job-search"
+    value={query}
+    onChange={(e) => setQuery(e.target.value)}
+  />
+</div>
+
               <div className="career_select_input_container">
                 <div>
                   <label>Experience Level</label>
@@ -424,7 +400,7 @@ const Career = () => {
         )}
 
         {/* BOTTOM CTA – editable text + image */}
-        <section
+         <section
           className="promotions-cta-banner"
           contentEditable={isEditMode}
           suppressContentEditableWarning={true}
@@ -432,36 +408,42 @@ const Career = () => {
           <div className="promotions-cta-inner">
             <div className="promotions-cta-text">
               <h2 className="promotions-cta-heading">
-                Lorem Ipsum content is
+                Let’s Build a Smarter, Secure 
                 <br />
-                dummy text
+                IT Future Together
               </h2>
               <p className="promotions-cta-desc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                commodo ligula eget dolor. Aenean massa.
+            Have a question or need expert support? Reach out to our team today—we’re here to provide fast, reliable guidance and the right IT solutions for your business.
               </p>
-              <button className="promotions-cta-btn">Know more</button>
+              <button
+                className="promotions-cta-btn"
+                type="button"
+                onClick={onOpenContact}
+              >
+                Know more
+              </button>
             </div>
             <div className="promotions-cta-image-wrap">
-              <img
-                src={ctaImage}
-                alt="CTA illustration"
-                className="promotions-cta-image"
-              />
+  <img
+    src={ctaImage}
+    alt="CTA illustration"
+    className="promotions-cta-image"
+  />
 
-              {isEditMode && (
-                <div className="hero-image-upload">
-                  <label className="hero-upload-label">
-                    Change CTA Image:
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleCtaImageChange}
-                    />
-                  </label>
-                </div>
-              )}
-            </div>
+  {isEditMode && (
+    <div className="promotions-image-upload">
+      <label className="promotions-upload-label">
+        Change CTA Image:
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleCtaImageChange}
+        />
+      </label>
+    </div>
+  )}
+</div>
+
           </div>
         </section>
       </div>

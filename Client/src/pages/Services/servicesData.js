@@ -224,11 +224,11 @@ const serviceContent = {
       subtitle: "Our streamlined setup process ensures every device is configured, secured, and ready for immediate use.",
       leftCards: [
         {
-          title: "Requirement Collection",
+          title: "Requirement  Collection",
           text: "We begin by understanding the user’s role, department needs, required applications, and hardware specifications so the device is prepared exactly for their workflow.",
         },
         {
-          title: "System Configuration",
+          title: "System   Configuration",
           text: "Our team installs the operating system, essential drivers, corporate software, and productivity tools while ensuring the device meets company standards.",
         },
       ],
