@@ -100,17 +100,20 @@
 }
 
 .industries-card-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
-  color: #111827;
+  color: #2B2B2B;
+  font-family: "Raleway";
 }
 
 .industries-card-text {
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.6;
   color: #6b7280;
   margin-bottom: 28px;
+  font-weight: 400;
+  font-family: "Roboto";
 }
 
 
@@ -127,6 +130,7 @@
   padding: 0;
   cursor: pointer;
   transition: transform 0.2s ease, color 0.2s ease;
+  font-family: "Raleway";
 }
 
 .industries-link:hover {
@@ -187,13 +191,7 @@
 }
 
 .core-service-card:hover {
-  background: linear-gradient(
-    135deg,
-    #ffd7ef 0%,
-    #ffd7ef 48%,
-    #ffffff 78%,
-    #ffffff 100%
-  );
+  
   box-shadow: 0 24px 40px rgba(51, 61, 116, 0.28);
   transform: translateY(-4px);
 }
@@ -356,7 +354,7 @@
   border-radius: 16px;
   padding: 32px 28px 28px;
   box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
-  margin-right: 50px;
+  margin-right: 130px;
   animation: fade-up 0.9s ease-out both;
 }
 
@@ -387,7 +385,7 @@
   font-size: 14px;
   color: #111827;
   outline: none;
-  background: #ffffff;
+  background: #D5FAFC;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -401,7 +399,7 @@
 }
 
 .consult-submit {
-  margin-top: 12px;
+  margin-top: 20px;
   align-self: center;
   width: 158px;
   height: 45px;
@@ -423,7 +421,6 @@
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
 }
-
 
 .industries-cta {
   max-width: 1280px;

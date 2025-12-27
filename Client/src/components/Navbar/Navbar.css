@@ -169,7 +169,7 @@
   transform: translateY(-10px);
   transition: all 0.3s ease;
   z-index: 1000;
-  overflow-y: auto;
+ overflow: visible;
   max-height: 600px;
   -webkit-overflow-scrolling: touch;
 }
@@ -296,20 +296,35 @@ button,
 }
 
 .submenu {
-  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 100%;          
+  margin-left: 12px;
+  width: 320px;
+  background: #ffffff;
   border-left: 3px solid #4A90E2;
-  margin: 4px 0 4px 20px;
-  border-radius: 8px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-10px);
+  transition: all 0.25s ease;
+  z-index: 9999;      
 }
+
 
 .submenu.show {
   max-height: 800px;
   margin-top: 8px;
   margin-bottom: 8px;
 }
+.submenu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+
 
 .submenu-item {
   display: block;

@@ -10,39 +10,23 @@ const Navbar = ({ openContactModal }) => {
   const [resourcesDropdownOpen, setResourcesDropdownOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
 
-  const [managedITSubmenuOpen, setManagedITSubmenuOpen] = useState(false);
-  const [cloudInfraSubmenuOpen, setCloudInfraSubmenuOpen] = useState(false);
-  const [dataProtectionSubmenuOpen, setDataProtectionSubmenuOpen] = useState(false);
-  const [managedSecuritySubmenuOpen, setManagedSecuritySubmenuOpen] = useState(false);
-  const [securityAssessmentSubmenuOpen, setSecurityAssessmentSubmenuOpen] =
-    useState(false);
+  // ✅ SINGLE SUBMENU STATE
+  const [activeSubmenu, setActiveSubmenu] = useState(null);
 
   const { isEditMode, toggleEditMode } = useEditMode();
   const servicesRef = useRef(null);
   const resourcesRef = useRef(null);
+
   const closeAllMenus = () => {
     setResourcesDropdownOpen(false);
     setServicesDropdownOpen(false);
-
-    setManagedITSubmenuOpen(false);
-    setCloudInfraSubmenuOpen(false);
-    setDataProtectionSubmenuOpen(false);
-    setManagedSecuritySubmenuOpen(false);
-    setSecurityAssessmentSubmenuOpen(false);
-
+    setActiveSubmenu(null);
     setMobileMenuOpen(false);
   };
+
   useEffect(() => {
     const handleScroll = () => {
-      const sections = [
-        "home",
-        "about",
-        "services",
-        "industries",
-        "blogs",
-        "promotions",
-      ];
-
+      const sections = ["home", "about", "services", "industries", "blogs", "promotions"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -50,7 +34,6 @@ const Navbar = ({ openContactModal }) => {
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetBottom = offsetTop + element.offsetHeight;
-
           if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
             setActiveSection(section);
             break;
@@ -70,22 +53,11 @@ const Navbar = ({ openContactModal }) => {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (
-        servicesRef.current &&
-        !servicesRef.current.contains(e.target)
-      ) {
+      if (servicesRef.current && !servicesRef.current.contains(e.target)) {
         setServicesDropdownOpen(false);
-        setManagedITSubmenuOpen(false);
-        setCloudInfraSubmenuOpen(false);
-        setDataProtectionSubmenuOpen(false);
-        setManagedSecuritySubmenuOpen(false);
-        setSecurityAssessmentSubmenuOpen(false);
+        setActiveSubmenu(null);
       }
-
-      if (
-        resourcesRef.current &&
-        !resourcesRef.current.contains(e.target)
-      ) {
+      if (resourcesRef.current && !resourcesRef.current.contains(e.target)) {
         setResourcesDropdownOpen(false);
       }
     };
@@ -99,18 +71,23 @@ const Navbar = ({ openContactModal }) => {
     };
   }, []);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(prev => !prev);
-  };
+  const toggleMobileMenu = () => setMobileMenuOpen(p => !p);
 
   const toggleResourcesDropdown = () => {
-    setResourcesDropdownOpen(prev => !prev);
+    setResourcesDropdownOpen(p => !p);
     setServicesDropdownOpen(false);
+    setActiveSubmenu(null);
   };
 
   const toggleServicesDropdown = () => {
-    setServicesDropdownOpen(prev => !prev);
+    setServicesDropdownOpen(p => !p);
     setResourcesDropdownOpen(false);
+    setActiveSubmenu(null);
+  };
+
+  // ✅ CORE LOGIC (accordion behavior)
+  const handleSubmenuToggle = (key) => {
+    setActiveSubmenu(prev => (prev === key ? null : key));
   };
 
   return (
@@ -120,126 +97,104 @@ const Navbar = ({ openContactModal }) => {
           <div className="logo">
             <img src={LOGO} alt="Qaidyn Partners Logo" className="logo-image" />
           </div>
-          <button
-            className="mobile-menu-toggle"
-            onClick={toggleMobileMenu}
-            aria-label="Toggle menu"
-          >
+
+          <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
             <span className={`hamburger ${mobileMenuOpen ? "open" : ""}`}>
-              <span />
-              <span />
-              <span />
+              <span /><span /><span />
             </span>
           </button>
+
           <nav className={`nav-menu ${mobileMenuOpen ? "mobile-open" : ""}`}>
             <a href="/" className="nav-link">Home</a>
             <a href="/about" className="nav-link">About Us</a>
+
+            {/* SERVICES */}
             <div className="nav-dropdown" ref={servicesRef}>
-              <button
-                className="nav-link dropdown-toggle"
-                onClick={toggleServicesDropdown}
-              >
+              <button className="nav-link dropdown-toggle" onClick={toggleServicesDropdown}>
                 Services
                 <span className={`dropdown-arrow ${servicesDropdownOpen ? "open" : ""}`}>▼</span>
               </button>
 
               <div className={`dropdown-menu ${servicesDropdownOpen ? "show" : ""}`}>
-               
+
+                {/* Managed IT */}
                 <div className="dropdown-item-wrapper">
-                  <div
-                    className="dropdown-item has-submenu"
-                    onClick={() => setManagedITSubmenuOpen(p => !p)}
-                  >
+                  <div className="dropdown-item has-submenu" onClick={() => handleSubmenuToggle("managedIT")}>
                     Managed IT Services <span className="submenu-arrow">›</span>
                   </div>
-                  <div className={`submenu ${managedITSubmenuOpen ? "show" : ""}`}>
+                  <div className={`submenu ${activeSubmenu === "managedIT" ? "show" : ""}`}>
                     <a href="/services/managed-it/helpdesk" className="submenu-item">Helpdesk</a>
-                    <a href="/services/managed-it/devices-setup" className="submenu-item">Devices Setup and Configuration</a>
+                    <a href="/services/managed-it/devices-setup" className="submenu-item">Devices Setup</a>
                     <a href="/services/managed-it/patch-management" className="submenu-item">Patch Management</a>
                     <a href="/services/managed-it/network-management" className="submenu-item">Network Management</a>
                     <a href="/services/managed-it/backup" className="submenu-item">Backup</a>
-                    <a href="/services/managed-it/vendor-coordination" className="submenu-item">Vendor Co-ordination</a>
+                    <a href="/services/managed-it/vendor-coordination" className="submenu-item">Vendor Coordination</a>
                   </div>
                 </div>
 
+                {/* Managed Security */}
                 <div className="dropdown-item-wrapper">
-                  <div
-                    className="dropdown-item has-submenu"
-                    onClick={() => setManagedSecuritySubmenuOpen(p => !p)}
-                  >
+                  <div className="dropdown-item has-submenu" onClick={() => handleSubmenuToggle("managedSecurity")}>
                     Managed Security Services <span className="submenu-arrow">›</span>
                   </div>
-                  <div className={`submenu ${managedSecuritySubmenuOpen ? "show" : ""}`}>
+                  <div className={`submenu ${activeSubmenu === "managedSecurity" ? "show" : ""}`}>
                     <a href="/services/managed-security/threat-detection" className="submenu-item">Threat Detection</a>
-                    <a href="/services/managed-security/endpoint-protection" className="submenu-item">End Point and Network Protection</a>
+                    <a href="/services/managed-security/endpoint-protection" className="submenu-item">Endpoint Protection</a>
                     <a href="/services/managed-security/incident-response" className="submenu-item">Incident Response</a>
-                    <a href="/services/managed-security/security-monitoring" className="submenu-item">Continuous Security Monitoring</a>
+                    <a href="/services/managed-security/security-monitoring" className="submenu-item">Security Monitoring</a>
                   </div>
                 </div>
 
-                
+                {/* Cloud */}
                 <div className="dropdown-item-wrapper">
-                  <div
-                    className="dropdown-item has-submenu"
-                    onClick={() => setCloudInfraSubmenuOpen(p => !p)}
-                  >
-                    Cloud and Infrastructure Services <span className="submenu-arrow">›</span>
+                  <div className="dropdown-item has-submenu" onClick={() => handleSubmenuToggle("cloud")}>
+                    Cloud & Infrastructure <span className="submenu-arrow">›</span>
                   </div>
-                  <div className={`submenu ${cloudInfraSubmenuOpen ? "show" : ""}`}>
-                    <a href="/services/cloud-infrastructure/cloud-setup" className="submenu-item">Cloud Setup and Migration</a>
-                    <a href="/services/cloud-infrastructure/virtual-servers" className="submenu-item">Virtual Private Servers</a>
+                  <div className={`submenu ${activeSubmenu === "cloud" ? "show" : ""}`}>
+                    <a href="/services/cloud-infrastructure/cloud-setup" className="submenu-item">Cloud Setup</a>
+                    <a href="/services/cloud-infrastructure/virtual-servers" className="submenu-item">Virtual Servers</a>
                     <a href="/services/cloud-infrastructure/virtual-desktops" className="submenu-item">Virtual Desktops</a>
-                    <a href="/services/cloud-infrastructure/it-infrastructure" className="submenu-item">IT Infrastructure and Planning</a>
+                    <a href="/services/cloud-infrastructure/it-infrastructure" className="submenu-item">IT Planning</a>
                   </div>
                 </div>
 
-               
+                {/* Security Assessment */}
                 <div className="dropdown-item-wrapper">
-                  <div
-                    className="dropdown-item has-submenu"
-                    onClick={() => setSecurityAssessmentSubmenuOpen(p => !p)}
-                  >
-                    Security Assessments and Compliance <span className="submenu-arrow">›</span>
+                  <div className="dropdown-item has-submenu" onClick={() => handleSubmenuToggle("assessment")}>
+                    Security Assessment & Compliance <span className="submenu-arrow">›</span>
                   </div>
-                  <div className={`submenu ${securityAssessmentSubmenuOpen ? "show" : ""}`}>
-                    <a href="/services/security-assessment/iso27001" className="submenu-item">ISO 27001 Assessment and Audit</a>
-                    <a href="/services/security-assessment/irap" className="submenu-item">iRAP Assessment and Audit</a>
-                    <a href="/services/security-assessment/soc2" className="submenu-item">SOC2 Assessment and Audit</a>
+                  <div className={`submenu ${activeSubmenu === "assessment" ? "show" : ""}`}>
+                    <a href="/services/security-assessment/iso27001" className="submenu-item">ISO 27001</a>
+                    <a href="/services/security-assessment/irap" className="submenu-item">iRAP</a>
+                    <a href="/services/security-assessment/soc2" className="submenu-item">SOC 2</a>
                     <a href="/services/security-assessment/risk-management" className="submenu-item">Risk Management</a>
-                    <a href="/services/security-assessment/policy-development" className="submenu-item">Policy Development</a>
-                    <a href="/services/security-assessment/security-training" className="submenu-item">Security Awareness Training</a>
                   </div>
                 </div>
 
-                
+                {/* Data Protection */}
                 <div className="dropdown-item-wrapper">
-                  <div
-                    className="dropdown-item has-submenu"
-                    onClick={() => setDataProtectionSubmenuOpen(p => !p)}
-                  >
-                    Data Protection and Recovery <span className="submenu-arrow">›</span>
+                  <div className="dropdown-item has-submenu" onClick={() => handleSubmenuToggle("data")}>
+                    Data Protection & Recovery <span className="submenu-arrow">›</span>
                   </div>
-                  <div className={`submenu ${dataProtectionSubmenuOpen ? "show" : ""}`}>
+                  <div className={`submenu ${activeSubmenu === "data" ? "show" : ""}`}>
                     <a href="/services/data-protection/backup" className="submenu-item">Backup</a>
                     <a href="/services/data-protection/disaster-recovery" className="submenu-item">Disaster Recovery</a>
                     <a href="/services/data-protection/ransomware-recovery" className="submenu-item">Ransomware Recovery</a>
                     <a href="/services/data-protection/encryption" className="submenu-item">Encryption</a>
                   </div>
                 </div>
+
               </div>
             </div>
 
             <a href="/industries" className="nav-link">Industries</a>
 
+            {/* RESOURCES */}
             <div className="nav-dropdown" ref={resourcesRef}>
-              <button
-                className="nav-link dropdown-toggle"
-                onClick={toggleResourcesDropdown}
-              >
+              <button className="nav-link dropdown-toggle" onClick={toggleResourcesDropdown}>
                 Resources
                 <span className={`dropdown-arrow ${resourcesDropdownOpen ? "open" : ""}`}>▼</span>
               </button>
-
               <div className={`dropdown-menu ${resourcesDropdownOpen ? "show" : ""}`}>
                 <a href="/blogs" className="dropdown-item">Blogs</a>
                 <a href="/guidelines" className="dropdown-item">Guidelines</a>
@@ -252,9 +207,7 @@ const Navbar = ({ openContactModal }) => {
           </nav>
 
           <div className="navbar-right-actions">
-            <a href="/contact" className="btn-contact desktop-contact">
-              Contact Us
-            </a>
+            <a href="/contact" className="btn-contact desktop-contact">Contact Us</a>
           </div>
         </div>
       </div>

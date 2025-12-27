@@ -42,25 +42,25 @@ const ContactPage = () => {
 
   const faqs = [
     {
-      question: "What services do you offer?",
-      answer: "We offer comprehensive IT solutions including Managed IT Services, Cloud Infrastructure, Cybersecurity, Data Protection, and Security Assessments. Our services are designed to meet the unique needs of modern enterprises across various industries."
+      question: "What services does Qaidyn  provide?",
+      answer: "We offer a full range of IT solutions including Managed IT Services, Managed Security Services, Cloud & Infrastructure Support, Data Protection, Recovery Services, and Security Assessments & Compliance. Our goal is to help businesses stay secure, efficient, and scalable."
     },
     {
-      question: "How quickly can you respond to support requests?",
+      question: "How do Managed IT Services benefit my business?",
       answer: "We provide 24/7 support with response times typically within 15 minutes for critical issues and 2 hours for standard requests. Our dedicated helpdesk team ensures your business operations continue smoothly with minimal downtime."
     },
     {
-      question: "Do you provide customized solutions?",
+      question: "Do you provide customized IT solutions for specific industries?",
       answer: "Absolutely! We understand that every business has unique requirements. Our team works closely with you to design and implement tailored IT solutions that align perfectly with your business goals, budget, and technical requirements."
     },
     {
-      question: "What industries do you specialize in?",
+      question: "How secure is my company’s data with your services?",
       answer: "We specialize in Healthcare, Finance, Education, Manufacturing, Retail, E-commerce, Logistics, and Software Development. Our team has deep industry expertise and understands the specific compliance and operational requirements of each sector."
     },
-    {
-      question: "How do you ensure data security?",
-      answer: "We implement multi-layered security protocols including advanced encryption, continuous monitoring, regular security audits, and compliance with industry standards like ISO 27001, SOC 2, and HIPAA. Your data security is our top priority."
-    }
+    // {
+    //   question: "How do you ensure data security?",
+    //   answer: "We implement multi-layered security protocols including advanced encryption, continuous monitoring, regular security audits, and compliance with industry standards like ISO 27001, SOC 2, and HIPAA. Your data security is our top priority."
+    // }
   ];
 
   return (
@@ -212,8 +212,7 @@ const ContactPage = () => {
           <div className="faq-header">
             <h2 className="faq-title">Frequently Ask Question</h2>
             <p className="faq-subtitle">
-              Find answers to common questions about our IT services and solutions
-            </p>
+Everything you need to know—clear, simple, and helpful.            </p>
           </div>
 
           <div className="faq-list">

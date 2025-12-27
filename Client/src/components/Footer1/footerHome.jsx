@@ -5,7 +5,6 @@ import facebookIcon from "../../assets/Frame.png";
 import instagramIcon from "../../assets/Frame (1).png";
 import twitterIcon from "../../assets/Frame (2).png";
 
-
 const HomeFooter = () => {
   const navigate = useNavigate();
 
@@ -13,7 +12,7 @@ const HomeFooter = () => {
     <footer className="footer1">
       <div className="footer1-container">
 
-        {/* TOP CONTENT */}
+        {/* ================= TOP CONTENT ================= */}
         <div className="footer1-content">
 
           {/* LOGO */}
@@ -30,12 +29,12 @@ const HomeFooter = () => {
 
             <div className="footer1-column">
               <p onClick={() => navigate("/promotions")}>Promotions</p>
-              <p>Guidelines</p>
+              <p onClick={() => navigate("/guidelines")}>Guidelines</p>
             </div>
 
             <div className="footer1-column">
               <p onClick={() => navigate("/industries")}>Industries</p>
-              <p>Casestudies</p>
+              <p onClick={() => navigate("/case-studies")}>Case Studies</p>
             </div>
 
             <div className="footer1-column">
@@ -55,7 +54,7 @@ const HomeFooter = () => {
 
         </div>
 
-        {/* BOTTOM BAR */}
+        {/* ================= BOTTOM BAR ================= */}
         <div className="footer1-bottom">
 
           <p className="footer1-copyright">
@@ -63,45 +62,46 @@ const HomeFooter = () => {
           </p>
 
           <div className="footer1-bottom-links">
-            <span onClick={() => navigate("/privacypolicy")}>Privacy Policy</span>
+            <span onClick={() => navigate("/privacypolicy")}>
+              Privacy Policy
+            </span>
             <span>|</span>
             <span onClick={() => navigate("/TermsAndConditions")}>
-              Terms Conditions
+              Terms & Conditions
             </span>
           </div>
 
+          {/* SOCIAL */}
           <div className="footer1-social">
-  <a
-    href="https://facebook.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="social-icon1"
-  >
-    <img src={facebookIcon} alt="Facebook" />
-  </a>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon1"
+            >
+              <img src={facebookIcon} alt="Facebook" />
+            </a>
 
-  <a
-    href="https://instagram.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="social-icon1"
-  >
-    <img src={instagramIcon} alt="Instagram" />
-  </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon1"
+            >
+              <img src={instagramIcon} alt="Instagram" />
+            </a>
 
-  <a
-    href="https://twitter.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="social-icon1"
-  >
-    <img src={twitterIcon} alt="Twitter" />
-  </a>
-</div>
-
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon1"
+            >
+              <img src={twitterIcon} alt="Twitter" />
+            </a>
+          </div>
 
         </div>
-
       </div>
     </footer>
   );

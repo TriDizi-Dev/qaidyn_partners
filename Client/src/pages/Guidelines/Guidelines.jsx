@@ -1,4 +1,3 @@
-// Guidelines.jsx
 import React, { useEffect, useState } from "react";
 import "./Guidelines.css";
 import "../casestudies/CaseStudies.css";
@@ -8,9 +7,12 @@ import timelineImgFile from "../../assets/casestudies/Vector 2.png";
 import step2ImgFile from "../../assets/casestudies/Frame 47.png";
 import step3ImgFile from "../../assets/casestudies/Frame 48.png";
 import step4ImgFile from "../../assets/casestudies/Frame 49.png";
-
-// ⭐ EDIT MODE
 import { useEditMode } from "../../components/context/EditModeContext.jsx";
+import ctaImg from "../../assets/casestudies/image 3.png";
+import service1 from "../../assets/service1.png";
+import service2 from "../../assets/service2.png";
+import service3 from "../../assets/service3.png";
+import service4 from "../../assets/service4.png";
 
 const guidelinesDataDefault = [
   {
@@ -60,13 +62,56 @@ const guidelinesDataDefault = [
   },
 ];
 
-const Guidelines = () => {
+const coreServices = [
+  {
+    title: "Managed IT Services",
+    icon: service1,
+    description:
+      "Reliable end-to-end IT management that keeps your systems running smoothly and efficiently.",
+  },
+  {
+    title: "Managed Security Services",
+    icon: service2,
+    description:
+      "Reliable end-to-end IT management that keeps your systems running smoothly and efficiently.",
+  },
+  {
+    title: "Cloud and Infrastructure services",
+    icon: service3,
+    description:
+      "Scalable cloud and infrastructure solutions designed to boost performance and reduce operational costs.",
+  },
+  {
+    title: "Security Assessments and compliance",
+    icon: service4,
+    description:
+      "Scalable cloud and infrastructure solutions designed to boost performance and reduce operational costs.",
+  },
+];
+
+const Guidelines = ({ onOpenContact }) => {
   const { isEditMode } = useEditMode();
 
   const [activeId, setActiveId] = useState(1);
-
-  // ⭐ Editable text content
   const [guidelinesData, setGuidelinesData] = useState(guidelinesDataDefault);
+
+  const [coreServiceIcons, setCoreServiceIcons] = useState([
+    service1,
+    service2,
+    service3,
+    service4,
+  ]);
+
+  const handleCoreServiceIconChange = (e, index) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setCoreServiceIcons((prev) => {
+      const next = [...prev];
+      next[index] = url;
+      return next;
+    });
+  };
 
   const handleTextChange = (id, field, value) => {
     setGuidelinesData((prev) =>
@@ -76,17 +121,16 @@ const Guidelines = () => {
     );
   };
 
-  // ⭐ Editable images
   const [timelineImage, setTimelineImage] = useState(timelineImgFile);
   const [step2Image, setStep2Image] = useState(step2ImgFile);
   const [step3Image, setStep3Image] = useState(step3ImgFile);
   const [step4Image, setStep4Image] = useState(step4ImgFile);
+  const [ctaImage, setCtaImage] = useState(ctaImg);
 
   const handleImageChange = (setter) => (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const url = URL.createObjectURL(file);
-    setter(url);
+    setter(URL.createObjectURL(file));
   };
 
   useEffect(() => {
@@ -99,205 +143,138 @@ const Guidelines = () => {
         <Navbar />
       </header>
 
-      {/* PAGE WRAPPER */}
       <div className="guidelines-container">
-        {/* TOP HEADING */}
         <div
           className="guidelinesheading"
           contentEditable={isEditMode}
-          suppressContentEditableWarning={true}
+          suppressContentEditableWarning
         >
-          <h1>Lorem ipsum dolor</h1>
+          <h1>Guidelines</h1>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s...
+            These guidelines outline our standards, expectations, and best
+            practices to ensure consistent, high-quality work across every
+            project.
           </p>
         </div>
 
-        {/* TIMELINE SECTION */}
         <div className="guidelines_timeline">
-          {guidelinesData.map((item, index) => {
-            const isActive = activeId === item.id;
-
-            return (
-              <div
-                key={item.id}
-                className={`guidelines_timeline-item ${
-                  index % 2 === 0 ? "left" : "right"
-                } ${isActive ? "active" : ""}`}
-                onClick={() => setActiveId(item.id)}
-              >
-                <div
-                  className={`guidelines_timeline-marker ${
-                    isActive ? "active-marker" : ""
-                  }`}
-                >
-                  <span className="guidelines_number">
-                    {String(item.id).padStart(2, "0")}
-                  </span>
-                </div>
-
-                <div
-                  className="guidelines_timeline-content"
-                  contentEditable={isEditMode}
-                  suppressContentEditableWarning={true}
-                  onInput={(e) =>
-                    handleTextChange(item.id, "description", e.target.innerText)
-                  }
-                >
-                  <h3
-                    onInput={(e) =>
-                      handleTextChange(item.id, "title", e.target.innerText)
-                    }
-                  >
-                    {item.title}
-                  </h3>
-
-                  <div className="guidelines_tags">
-                    <span className="guidelines_tag level">{item.level}</span>
-                    <span className="guidelines_tag channel">{item.channel}</span>
-                    <span className="guidelines_tag medium">{item.medium}</span>
-                  </div>
-
-                  <p>{item.description}</p>
-                </div>
+          {guidelinesData.map((item, index) => (
+            <div
+              key={item.id}
+              className={`guidelines_timeline-item ${
+                index % 2 === 0 ? "left" : "right"
+              } ${activeId === item.id ? "active" : ""}`}
+              onClick={() => setActiveId(item.id)}
+            >
+              <div className="guidelines_timeline-marker">
+                <span className="guidelines_number">
+                  {String(item.id).padStart(2, "0")}
+                </span>
               </div>
-            );
-          })}
+
+              <div
+                className="guidelines_timeline-content"
+                contentEditable={isEditMode}
+                suppressContentEditableWarning
+                onInput={(e) =>
+                  handleTextChange(
+                    item.id,
+                    "description",
+                    e.target.innerText
+                  )
+                }
+              >
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* HOW IT WORKS */}
-      <section className="cs-how">
-        <h2 contentEditable={isEditMode} suppressContentEditableWarning={true}>
-          How It Works
-        </h2>
+      <section
+        className="core-services-section"
+        contentEditable={isEditMode}
+        suppressContentEditableWarning
+      >
+        <h2 className="core-services-title">Our Core services</h2>
 
-        <div className="cs-timeline">
-          <img src={timelineImage} alt="" className="cs-timeline-bg" />
+        <div className="core-services-grid">
+          {coreServices.map((service, index) => (
+            <article className="core-service-card" key={index}>
+              <div className="core-service-header">
+                <div className="core-service-icon-wrap">
+                  <img
+                    src={coreServiceIcons[index] || service.icon}
+                    alt={service.title}
+                    className="core-service-icon"
+                  />
+                </div>
 
-          {isEditMode && (
-            <label className="cs-upload-label">
-              Change Timeline Image
-              <input type="file" accept="image/*" onChange={handleImageChange(setTimelineImage)} />
-            </label>
-          )}
+                {isEditMode && (
+                  <div className="core-service-upload-wrap">
+                    <label className="core-service-upload-label">
+                      Change Icon:
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                          handleCoreServiceIconChange(e, index)
+                        }
+                      />
+                    </label>
+                  </div>
+                )}
 
-          <div className="cs-steps">
-            {/* STEP 1 */}
-            <div
-              className="cs-step cs-step-1"
-              contentEditable={isEditMode}
-              suppressContentEditableWarning={true}
-            >
-              <div className="cs-num">1</div>
-              <p className="cs-step-desc-top">
-                Cyber safety, crime prevention,
-                <br />
-                defense, or enterprise security.
-              </p>
-              <div className="cs-pill cs-pill-top">Select Your Focus</div>
-              <div className="cs-dot" />
-            </div>
+                <h3 className="core-service-name">{service.title}</h3>
+              </div>
 
-            {/* STEP 2 */}
-            <div className="cs-step cs-step-2">
-              <div className="cs-num">2</div>
-              <img src={step2Image} className="cs-step-img" alt="" />
+              <p className="core-service-text">{service.description}</p>
 
-              {isEditMode && (
-                <label className="cs-upload-label">
-                  Change Step 2 Image
-                  <input type="file" accept="image/*" onChange={handleImageChange(setStep2Image)} />
-                </label>
-              )}
-            </div>
-
-            {/* STEP 3 */}
-            <div className="cs-step cs-step-3">
-              <div className="cs-num">3</div>
-              <img src={step3Image} className="cs-step-img" alt="" />
-
-              {isEditMode && (
-                <label className="cs-upload-label">
-                  Change Step 3 Image
-                  <input type="file" accept="image/*" onChange={handleImageChange(setStep3Image)} />
-                </label>
-              )}
-            </div>
-
-            {/* STEP 4 */}
-            <div className="cs-step cs-step-4">
-              <img src={step4Image} className="cs-step-img" alt="" />
-              <div className="cs-num cs-num-bottom">4</div>
-
-              {isEditMode && (
-                <label className="cs-upload-label">
-                  Change Step 4 Image
-                  <input type="file" accept="image/*" onChange={handleImageChange(setStep4Image)} />
-                </label>
-              )}
-            </div>
-          </div>
+              <button className="core-service-link" type="button">
+                <span>Learn More</span>
+                <span className="core-service-link-arrow">→</span>
+              </button>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* CORE SERVICES (editable) */}
-      <section className="core-services-section">
-        <div
-          className="core-services-container"
-          contentEditable={isEditMode}
-          suppressContentEditableWarning={true}
-        >
-          <h2 className="core-services-title">
-            Our Core Services & Industries
-          </h2>
+      <section
+        className="cs-cta"
+        contentEditable={isEditMode}
+        suppressContentEditableWarning
+      >
+        <div className="cs-container cs-cta-inner">
+          <div className="cs-cta-left">
+            <h2>Let’s Build a Smarter, Secure IT Future Together</h2>
+            <p>
+             Have a question or need expert support? Reach out to our team today—we’re here to provide fast, reliable guidance and the right IT solutions for your business.
+            </p>
+            <button
+              className="cs-btn-white"
+              type="button"
+              onClick={onOpenContact}
+            >
+              Know more
+            </button>
+          </div>
 
-          <div className="core-services-grid">
-            <div className="service-card">
-              <h3>Managed IT Services</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                pulvinar, sapien ac facilisis gravida.
-              </p>
-              <a href="#" className="learn-more">
-                Learn More → 
-              </a>
-            </div>
+          <div className="cs-cta-right">
+            <img src={ctaImage} alt="CTA" />
 
-            <div className="service-card highlighted">
-              <h3>Managed Security Services</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                pulvinar, sapien ac facilisis gravida.
-              </p>
-              <a href="#" className="learn-more">
-                Learn More →
-              </a>
-            </div>
-
-            <div className="service-card">
-              <h3>Cloud and Infrastructure services</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                pulvinar, sapien ac facilisis gravida.
-              </p>
-              <a href="#" className="learn-more">
-                Learn More →
-              </a>
-            </div>
-
-            <div className="service-card">
-              <h3>Security Assessments and compliance</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                pulvinar, sapien ac facilisis gravida.
-              </p>
-              <a href="#" className="learn-more">
-                Learn More →
-              </a>
-            </div>
+            {isEditMode && (
+              <div className="cs-image-upload">
+                <label className="cs-upload-label">
+                  Change CTA Image:
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange(setCtaImage)}
+                  />
+                </label>
+              </div>
+            )}
           </div>
         </div>
       </section>

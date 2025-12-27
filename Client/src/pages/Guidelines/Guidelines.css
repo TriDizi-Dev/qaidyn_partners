@@ -435,3 +435,201 @@ border: 1px solid;
     transform: none;
   }
 }
+
+
+.core-services-section {
+  width: 100%;                
+  margin: 72px auto 80px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;         
+}
+
+.core-services-title {
+  font-family: "Poppins", system-ui;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: -0.02em;
+  color: #111827;
+  margin-bottom: 32px;
+}
+
+.core-services-grid {
+  width: 100%;
+  max-width: 1214px;                    
+  min-height: 274px;
+  margin: 0 auto;                       
+  display: grid;
+  grid-template-columns: repeat(4, 270px);
+  column-gap: 15px;
+  justify-content: center;              
+  justify-items: stretch;
+}
+
+.core-service-card {
+  width: 270px;
+  min-height: 269px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+  padding: 32px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  transition: all 0.35s ease;
+  animation: fade-up 0.8s ease-out both;
+}
+
+.core-service-card:hover {
+  box-shadow: 0 24px 40px rgba(51, 61, 116, 0.28);
+  transform: translateY(-4px);
+}
+
+
+.core-service-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.core-service-icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #0088ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(51, 61, 212, 0.3);
+}
+
+.core-service-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.core-service-name {
+  font-family: "Rubik", system-ui;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.33;
+  color: #111827;
+}
+
+.core-service-text {
+  font-family: "Rubik", system-ui;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1;
+  color: #6b7280;
+  margin-top: 4px;
+  margin-bottom: 18px;
+}
+
+.core-service-link {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Rubik", system-ui;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1;
+  color: #0088ff;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.core-service-link:hover {
+  color: #005fae;
+  transform: translateX(2px);
+}
+
+.core-service-link-arrow {
+  font-size: 16px;
+  transform: translateY(1px);
+}
+.cs-cta {
+  background: #1db5be;
+  padding: 96px 0;
+  color: #ffffff;
+}
+
+.cs-cta-inner {
+  max-width: 1406px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 80px;
+}
+
+.cs-cta-left {
+  max-width: 656px;
+  animation: cs-fade-left 0.9s ease-out both;
+}
+
+.cs-cta-left h2 {
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0 0 20px; 
+  color: #111827;
+}
+
+.cs-cta-left p {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+  margin: 0 0 40px; 
+  max-width: 656px;
+}
+
+.cs-btn-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 144px;
+  height: 56px;
+  padding: 0 24px;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #6155F5;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-top: 8px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+.cs-btn-white:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+}
+
+.cs-btn-white:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.cs-cta-right img {
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  animation: cs-float 5s ease-in-out infinite, cs-fade-right 0.9s ease-out both;
+}

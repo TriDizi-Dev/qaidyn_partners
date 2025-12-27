@@ -558,7 +558,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
   animation: fadeInLeft 1s ease forwards;
-  margin-top: 60px;
+  margin-top: -100px;
 }
 
 .hero-title {
@@ -601,7 +601,7 @@ body {
 }
 
 .hero-button-wrapper {
-  margin-top: 35px; 
+  margin-top: 58px; 
 }
 
 .btn-primary:hover {
@@ -610,22 +610,22 @@ body {
 }
 
 .hero-image {
-  width: 647.97px;
-  height: 647.97px;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   animation: fadeInRight 1s ease forwards;
-  margin-left: -78px;
-  margin-top: 20px;;
+  margin-top: 0px;
 }
 
 .hero-illustration {
-  width: 100%;
-  height: 100%;
+  width: 647.97px;
+  height: 647.97px;
   object-fit: contain;
   filter: none; 
   animation: float 3s ease-in-out infinite;
+  margin-left: -150px;
 }
 
 .hero-section::before {
@@ -650,6 +650,7 @@ body {
   background: url("../../assets/homepage/Left Band 1.png") no-repeat;
   background-size: contain;
   z-index: 2;
+  
 }
 
 .hero-left-band-2 {
@@ -1083,78 +1084,84 @@ body {
 
 .home-industries-section .industries-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
-  margin-top: 80px;
+  grid-template-columns: repeat(4, 293px);  gap: 24px;
+  margin-top: 70px;
+ justify-content: center; 
+  grid-auto-rows: 1fr;
 }
+
 
 .home-industries-section .industry-card {
-  width: 293px;
-  height: 343px;
+  width: 293px;             
+  height: 343px;             
   background: #ffffff;
-  padding: 30px 20px;
   border-radius: 17px;
-  border: 0.5px solid #BFBFBF;
-  cursor: pointer;
+  padding: 32px 28px 28px;
+  border: 0.5px solid #bfbfbf;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
   text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;    
 }
 
-.home-industries-section .industry-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-}
 
 .home-industries-section .industry-icon-wrapper {
-  width: 80px;
-  height: 80px;
-  background: #e3f2fd;
+  width: 79px;
+  height: 79px;
   border-radius: 50%;
+  background: #cde8fa;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 .home-industries-section .industry-icon-img {
-  width: 45px;
-  height: 45px;
+  width: 49px;
+  height: 49px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .home-industries-section .industry-title {
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: #2B2B2B;
   font-family: "Raleway";
   line-height: 30px;
-  letter-spacing: 0%;
-  margin-bottom: 30px;
+  width: 257px;
+  height: 30px;
 }
 
 .home-industries-section .industry-description {
   font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 10px;
-  color: #808080;
+  line-height: 1.6;
+  color: #6b7280;
   font-family: "Roboto";
-  line-height: 24px;
-  letter-spacing: 0%;
-  
+  min-height: 80px;        
+  width: 257px;
+  height: 96px;
+  margin-top: 20px;
+
 }
 
 .home-industries-section .industry-link {
-  color: #0098FF;
+  margin-top: 30px;
   font-size: 16px;
   font-weight: 500;
+  color: #0098ff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
   font-family: "Raleway";
-  line-height: 24px;
-  text-decoration: none;
 }
+
 .home-industries-section .industry-card {
   text-align: left;   
 }

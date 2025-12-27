@@ -1,146 +1,142 @@
+/* ===============================
+   ROOT VARIABLES
+================================ */
 :root{
   --page-bg: #ffffff;
-  --card-bg: #D5FAFC; 
-  --card-border: rgba(0,0,0,0.04);
+  --doc-bg: #D5FAFC;        
   --text-color: #0b2230;
   --muted: #5f6b6b;
-  --max-width: 900px;
+  --max-width: 1300px;
 }
 
+/* ===============================
+   PAGE
+================================ */
 .privacy-page{
   background: var(--page-bg);
-  /* padding: 4.5rem 1rem; */
-  box-sizing: border-box;
   color: var(--text-color);
   margin-top: 9vw;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: system-ui, -apple-system, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial;
 }
 
 .privacy-container{
   width: 85%;
   margin: 0 auto;
   padding: 0 1.2rem;
-  margin-bottom: 0vw;
 }
 
+/* ===============================
+   HERO
+================================ */
 .privacy-hero{
   text-align: center;
-  /* margin-bottom: 1.6rem; */
 }
 
 .privacy-title{
   margin: 0;
-  font-size: 1.6rem;
-  font-weight: 800;
-  letter-spacing: -0.4px;
-  color: var(--text-color);
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -2.5%;
+  font-family: "inter";
+  font-size: "Bold";
+  line-height: 60px;
 }
 
 .privacy-sub{
   margin: 0.5rem auto 0;
   max-width: 720px;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  color: #4D625F;
+  font-size: 18px;
+  line-height: 160%;
+  font-weight: 400;
+  font-family: "Roboto";
 }
 
-/* policy cards */
-.policy-card{
-  background: var(--card-bg);
-  border-radius: 10px;
-  padding: 1.6rem;
-  box-shadow: 0 6px 20px rgba(3, 19, 34, 0.03);
-  border: 1px solid var(--card-border);
-  margin-top: 1.4rem;
-  overflow: hidden;
+/* ===============================
+   MIDDLE CONTENT (FIGMA TYPOGRAPHY MATCH)
+================================ */
+.privacy-document{
+  background: var(--doc-bg);
+  border-radius: 25px;
+  padding: 3.6rem 4.2rem;
+  margin: 2.8rem auto 0;
+  width: 100%;
+  max-width: 1303px;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 45px;
+  letter-spacing: 0;
+  color: #0C0C0D;
+  text-align: justify;
 }
 
-/* headings inside card */
-.policy-heading{
-  margin: 0 0 0.6rem 0;
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #06212a;
+/* ===============================
+   SECTION TITLES (1. Introduction, etc.)
+================================ */
+.privacy-document h2{
+  margin-top: 2.2rem;
+  margin-bottom: 0.6rem;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: 700;          /* 🔥 Bold */
+  line-height: 45px;
+  letter-spacing: 0;
+  color: #0C0C0D;
+  text-align: justify;
 }
 
-.policy-subheading{
-  margin: 1rem 0 0.4rem 0;
-  font-size: 0.98rem;
-  font-weight: 700;
-  color: #18333a;
+/* ===============================
+   SUB TITLES (A. Personal Information)
+================================ */
+.privacy-document h3{
+  margin-top: 1.6rem;
+  margin-bottom: 0.4rem;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: 700;          /* 🔥 Bold */
+  line-height: 45px;
+  letter-spacing: 0;
+  color: #0C0C0D;
+  text-align: justify;
 }
 
-/* paragraphs and list */
-.policy-paragraph{
-  margin: 0.4rem 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 2vw;
+/* ===============================
+   PARAGRAPHS
+================================ */
+.privacy-document p{
+  margin-bottom: 0.8rem;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: 400;          /* 🔥 Regular */
+  line-height: 45px;
+  letter-spacing: 0;
+  color: #0C0C0D;
+  text-align: justify;
 }
 
-.policy-list{
-  margin: 0.6rem 0 0.6rem 1.15rem;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
+/* ===============================
+   LISTS
+================================ */
+.privacy-document ul{
+  margin: 0.6rem 0 1rem 2rem;
+  padding: 0;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 45px;
+  letter-spacing: 0;
+  color: #0C0C0D;
+  text-align: justify;
   list-style-type: disc;
 }
 
-/* spacing for last elements */
-.policy-card + .policy-card{
-  margin-top: 1.2rem;
-}
-
-
-/* MOBILE: stack & scale font sizes */
-@media (max-width: 600px){
-  :root{
-    --max-width: 680px;
-  }
-
-  .privacy-page{
-    padding: 3.2rem 0.6rem;
-  }
-
-  .privacy-container{
-    padding: 0 0.8rem;
-    width: 95%;
-    margin-top: 6vw;
-  }
-
-  .privacy-title{
-    font-size: 1.15rem;
-  }
-
-  .privacy-sub{
-    font-size: 0.92rem;
-    padding: 0 0.4rem;
-  }
-
-  .policy-card{
-    padding: 1.1rem;
-    border-radius: 10px;
-  }
-
-  .policy-heading{
-    font-size: 0.98rem;
-  }
-
-  .policy-subheading{
-    font-size: 0.95rem;
-  }
-
-  .policy-paragraph,
-  .policy-list{
-    font-size: 0.92rem;
-  }
-}
-
-/* small visual polish */
-.policy-card p:last-child {
-  margin-bottom: 0;
-}
 
 /* container */
 .policy_last_container {
@@ -211,23 +207,31 @@
   box-shadow: 0 12px 28px rgba(27, 14, 62, 0.12);
   outline: none;
 }
-
-/* decorative left semi-circle (placed so it appears cut out from the banner) */
 .decor-left {
   position: absolute;
-  top: 18.55%;
-  transform: translate(
-    -485.5%,
-    -10%
-  );
-  width: 6.6rem;
-  height: auto;
-  z-index: 4;
+  width: 121px;
+  height: 120px;
+  top: 0;
+  left: 0;
+  transform: translate(-40%, -40%) scaleX(-1);
+  background: #ffffff;
+  border-top-left-radius: 10px;
+  z-index: 6;            
   pointer-events: none;
-  filter: none;
+}
+.policy_last_inner::before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 121px;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+  border-bottom-right-radius: 120px;
+  z-index: 2;
 }
 
-/* decorative right stripes */
+
 .decor-right {
   position: absolute;
   width: 10rem;
@@ -240,116 +244,79 @@
 }
 
 
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 1024px){
+  .privacy-document{
+    padding: 2.6rem 2.6rem;
+  }
 
-/* Responsive adjustments */
-
-/* Medium tablet */
-@media (max-width: 1024px) {
-  .policy_last_inner {
+  .policy_last_inner{
     padding: 2.6rem 3rem;
+    height: auto;
   }
 
-  .work-title {
+  .work-title{
     font-size: 1.35rem;
-  }
-
-  .decor-left {
-    width: 5.6rem;
-    transform: translate(-48%, -50%);
-  }
-
-  .decor-right {
-    width: 9rem;
-    transform: translate(40%, 0);
   }
 }
 
-/* Mobile layout */
-@media (max-width: 1024px) {
-  .policy_last_inner {
-    padding: 2.6rem 3rem;
-      width: 95%;
-  height: 15vw;
+@media (max-width: 600px){
+  .privacy-container{
+    width: 95%;
   }
 
-  .work-title {
-    font-size: 1.35rem;
+  .privacy-title{
+    font-size: 1.15rem;
   }
 
-  .decor-left {
-    width: 5.6rem;
-    transform: translate(-48%, -50%);
-  }
-
-  .decor-right {
-    width: 9rem;
-    transform: translate(40%, 0);
-  }
-}
-
-/* Mobile layout */
-@media (max-width: 600px) {
-  .policy_last_container {
-    width: 104vw;
-    margin: 0vw auto;
-    margin-left: -10vw;
-    margin-top: 20vw;
-    margin-bottom: 40vw;
-    height: 50vw;
-  }
-
-  .policy_last_inner {
-    border-radius: 8px;
-    text-align: center;
-    height: 70vw;
-  }
-
-  .work-title {
-    font-size: 1.05rem;
-  }
-
-  .work-sub {
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    padding: 0 0.4rem;
-  }
-
-  .ask-btn {
-    padding: 0.56rem 0.9rem;
+  .privacy-sub{
     font-size: 0.92rem;
   }
 
-  /* shrink and reposition decorative images on small screens */
-  .decor-left {
+  .privacy-document{
+    padding: 2rem 1.6rem;
+    border-radius: 18px;
+  }
+
+  .privacy-document h2{
+    font-size: 1rem;
+  }
+
+  .privacy-document p,
+  .privacy-document ul{
+    font-size: 0.92rem;
+  }
+
+  .policy_last_container{
+    width: 104vw;
+    margin-left: -10vw;
+    margin-top: 20vw;
+    margin-bottom: 40vw;
+  }
+
+  .policy_last_inner{
+    height: 70vw;
+    padding: 2.2rem 1.4rem;
+  }
+
+  .work-title{
+    font-size: 1.05rem;
+  }
+
+  .work-sub{
+    font-size: 0.9rem;
+  }
+
+  .decor-left{
     width: 3.8rem;
     top: 32%;
     transform: translate(-269%, -169%);
-    left: 50%;
   }
 
-  .decor-right {
+  .decor-right{
     width: 7.4rem;
-    bottom: 0.6rem;
     transform: translate(-173%, 120%);
-    left: 50%;
-  }
-}
-
-
-/* Very small phones: stack and ensure images don't overlap text */
-@media (max-width: 360px) {
-  .policy_last_inner {
-    padding: 1.8rem 1rem;
-  }
-
-  .decor-left {
-    width: 3.4rem;
-    top: 30%;
-    transform: translate(-40%, -50%);
-  }
-
-  .decor-right {
-    width: 6rem;
-    transform: translate(34%, 0);
   }
 }

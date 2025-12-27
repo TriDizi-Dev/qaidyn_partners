@@ -4,124 +4,88 @@ import blog1 from "../../assets/blogs/blogimg1.jpg";
 import blog2 from "../../assets/blogs/blogimg2.jpg";
 import blog3 from "../../assets/blogs/blogimg3.png";
 import blog4 from "../../assets/blogs/blogimg4.jpg";
-import authorImg from "../../assets/blogs/autherimg.png";
+import ctaImg from "../../assets/casestudies/image 3.png";
 import HomeFooter from "../../components/Footer1/footerHome.jsx";
 import Navbar from "../../components/Navbar/Navbar";
 
-import ctaImg from "../../assets/promotions/freepik--Laptop--inject-23.png";
+import iconConsult from "../../assets/services/Frame 18.png";
+import iconEvaluate from "../../assets/services/Frame 18 (1).png";
+import iconDeploy from "../../assets/services/Frame 18 (3).png";
+import twoColumnImg from "../../assets/services/Image.png";
 import { useNavigate } from "react-router-dom";
 import { useEditMode } from "../../components/context/EditModeContext.jsx";
-import { database } from "../../components/Firebase/firebase.js";
-import { ref, get } from "firebase/database";
 
 const Blogs = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  // const [blogPosts, setBlogs] = useState([]);
 
   const navigate = useNavigate();
+  const { isEditMode } = useEditMode();
+  const [openFAQ, setOpenFAQ] = useState(-1);
 
-  const [openFAQ, setOpenFAQ] = useState(0);
-  const { isEditMode } = useEditMode(); // ⭐ read global edit mode
+  const twoColumn = {
+    title: "Quality That Speaks Through Every Word",
+    subtitle:
+      "At Qaidyn Partners, we ensure every blog reflects deep expertise, strategic thinking, and actionable insights that drive real value for founders, leaders, and growing businesses.",
+    image: ctaImg,
+    items: [
+      {
+        icon: iconConsult,
+        title: "Insight-Driven Research",
+        text: "Our content is built on verified data, industry trends, and real business challenges—ensuring every blog delivers clarity, relevance, and credibility.",
+      },
+      {
+        icon: iconDeploy,
+        title: "Strategic Storytelling",
+        text: "We transform complex topics into simple, structured, and engaging narratives that help readers understand, learn, and apply ideas in their business journey.",
+      },
+      {
+        icon: iconEvaluate,
+        title: "Action-Focused Outcomes",
+        text: "Each blog concludes with practical steps, frameworks, and takeaways, empowering readers to make informed decisions and implement strategies confidently.",
+      },
+    ],
+  };
 
-  //   useEffect(() => {
-  //   const fetchBlogs = async () => {
-  //     const blogRef = ref(database, "blogs");
-  //     try {
-  //       const snapshot = await get(blogRef);
-  //       if (snapshot.exists()) {
-  //         const data = snapshot.val();
-  //         const blogList = Object.keys(data).map((key) => ({
-  //           id: key,
-  //           ...data[key],
-  //           imageUrl: data[key].image_url || "",
-  //         }));
-  //         setBlogs(blogList);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching blog data:", error);
-  //     }
-  //   };
-  //   fetchBlogs();
-  // }, []);
+  const [twoColumnImage, setTwoColumnImage] = useState(twoColumn.image);
+  const [ctaImage, setCtaImage] = useState(ctaImg);
+
+  const handleImageChange = (setter) => (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setter(url);
+  };
 
   const blogPosts = [
-    {
-      id: 1,
-      title: "Advanced Machine Learning Techniques in 2025",
-      category: "AI & ML",
-      img: blog1,
-    },
-    {
-      id: 2,
-      title: "Building Scalable Microservices Architecture",
-      category: "Backend",
-      img: blog2,
-    },
-    {
-      id: 3,
-      title: "The Future of Cloud Computing and Edge AI",
-      category: "Cloud",
-      img: blog3,
-    },
-    {
-      id: 4,
-      title: "Designing Intuitive User Experiences with AI",
-      category: "UX/UI",
-      img: blog4,
-    },
-    {
-      id: 5,
-      title: "Advanced Machine Learning Techniques in 2025",
-      category: "AI & ML",
-      img: blog1,
-    },
-    {
-      id: 6,
-      title: "Building Scalable Microservices Architecture",
-      category: "Backend",
-      img: blog2,
-    },
-    {
-      id: 7,
-      title: "The Future of Cloud Computing and Edge AI",
-      category: "Cloud",
-      img: blog3,
-    },
-    {
-      id: 8,
-      title: "Designing Intuitive User Experiences with AI",
-      category: "UX/UI",
-      img: blog4,
-    },
+    { id: 1, title: "Advanced Machine Learning Techniques in 2025", category: "AI & ML", img: blog1 },
+    { id: 2, title: "Building Scalable Microservices Architecture", category: "Backend", img: blog2 },
+    { id: 3, title: "The Future of Cloud Computing and Edge AI", category: "Cloud", img: blog3 },
+    { id: 4, title: "Designing Intuitive User Experiences with AI", category: "UX/UI", img: blog4 },
+    { id: 5, title: "Advanced Machine Learning Techniques in 2025", category: "AI & ML", img: blog1 },
+    { id: 6, title: "Building Scalable Microservices Architecture", category: "Backend", img: blog2 },
+    { id: 7, title: "The Future of Cloud Computing and Edge AI", category: "Cloud", img: blog3 },
+    { id: 8, title: "Designing Intuitive User Experiences with AI", category: "UX/UI", img: blog4 },
   ];
 
   const faqs = [
     {
-      question: "What services do you offer?",
+      question: "What services does Qaidyn provide?",
       answer:
-        "We offer comprehensive IT solutions including Managed IT Services, Cloud Infrastructure, Cybersecurity, Data Protection, and Security Assessments. Our services are designed to meet the unique needs of modern enterprises across various industries.",
+        "We offer a full range of IT solutions including Managed IT Services, Managed Security Services, Cloud & Infrastructure Support, Data Protection, Recovery Services, and Security Assessments & Compliance.",
     },
     {
-      question: "How quickly can you respond to support requests?",
-      answer:
-        "We provide 24/7 support with response times typically within 15 minutes for critical issues and 2 hours for standard requests. Our dedicated helpdesk team ensures your business operations continue smoothly with minimal downtime.",
+      question: "How do Managed IT Services benefit my business?",
+      answer: "We provide 24/7 support with fast response times for critical and standard issues.",
     },
     {
-      question: "Do you provide customized solutions?",
-      answer:
-        "Absolutely! We understand that every business has unique requirements. Our team works closely with you to design and implement tailored IT solutions that align perfectly with your business goals, budget, and technical requirements.",
+      question: "Do you provide customized IT solutions?",
+      answer: "Yes, we design and implement solutions tailored to your business needs.",
     },
     {
-      question: "What industries do you specialize in?",
-      answer:
-        "We specialize in Healthcare, Finance, Education, Manufacturing, Retail, E-commerce, Logistics, and Software Development. Our team has deep industry expertise and understands the specific compliance and operational requirements of each sector.",
-    },
-    {
-      question: "How do you ensure data security?",
-      answer:
-        "We implement multi-layered security protocols including advanced encryption, continuous monitoring, regular security audits, and compliance with industry standards like ISO 27001, SOC 2, and HIPAA. Your data security is our top priority.",
+      question: "How secure is my company’s data?",
+      answer: "Through encryption, continuous monitoring, audits, and compliance standards.",
     },
   ];
 
@@ -132,15 +96,17 @@ const Blogs = () => {
       </header>
 
       <div className="blogspage-page">
+
+        {/* BLOG HEADER */}
         <header
           className="blogspage-header"
           contentEditable={isEditMode}
-          suppressContentEditableWarning={true}
+          suppressContentEditableWarning
         >
           <h1>Blogs</h1>
           <p className="blogspage-subtitle">
-            We share the best quality articles on the latest trends in
-            technology, design, and innovation.
+            We share the best quality articles on the latest trends in technology,
+            design, and innovation.
           </p>
 
           <div className="blogs-search-container">
@@ -152,16 +118,13 @@ const Blogs = () => {
           </div>
         </header>
 
-        {/* BLOG GRID – editable text when in edit mode */}
-        <section
-          className="blogspage-grid"
-          contentEditable={isEditMode}
-          suppressContentEditableWarning={true}
-        >
-          { blogPosts.length>0 ? blogPosts.map((post) => (
+        {/* BLOG GRID (CLICK FIXED) */}
+        <section className="blogspage-grid">
+          {blogPosts.map((post) => (
             <article
               key={post.id}
               className="blogpage-card"
+              contentEditable={false}
               onClick={() => navigate(`/singleBlog/${post.id}`)}
             >
               <div className="blogpage-image-wrapper">
@@ -175,84 +138,71 @@ const Blogs = () => {
                 <span className="blogpage-category">{post.category}</span>
                 <h3 className="blogpage-title">{post.title}</h3>
                 <p className="blogpage-excerpt">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor...
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
               </div>
             </article>
-          )):(
-            <p className="blogsNotFound">No Blogs found......</p>
-          )}
+          ))}
         </section>
 
-        {/* FEATURED CONTENT */}
+        {/* TWO COLUMN */}
         <section
-          className="blogspage-featured"
+          className="helpdesk-two-column"
           contentEditable={isEditMode}
-          suppressContentEditableWarning={true}
+          suppressContentEditableWarning
         >
-          <h2>Lorem Ipsum Content</h2>
-          <p className="featuredpage-desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-
-          <div className="featuredpage-grid">
-            <div className="featuredpage-left">
-              <div className="featuredpage-item">
-                <div className="featuredpage-icon">Icon</div>
-                <div>
-                  <h4>Advanced Technology</h4>
-                  <p>
-                    We use cutting-edge tools and frameworks to build
-                    future-ready solutions.
-                  </p>
-                </div>
-              </div>
-              <div className="featuredpage-item">
-                <div className="featuredpage-icon">Icon</div>
-                <div>
-                  <h4>Expert Team</h4>
-                  <p>
-                    Our team consists of industry veterans and passionate
-                    innovators.
-                  </p>
-                </div>
-              </div>
-              <div className="featuredpage-item">
-                <div className="featuredpage-icon">Icon</div>
-                <div>
-                  <h4>Lorum Ipsum</h4>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </p>
-                </div>
-              </div>
+          <div className="helpdesk-two-column-inner">
+            <div className="helpdesk-two-header">
+              <h2 className="helpdesk-two-title">{twoColumn.title}</h2>
+              <p className="helpdesk-two-subtitle">{twoColumn.subtitle}</p>
             </div>
 
-            <div className="featuredpage-right">
-              <img
-                src={authorImg}
-                alt="Team working"
-                className="featuredpage-image"
-              />
+            <div className="helpdesk-two-body">
+              <ul className="helpdesk-feature-list">
+                {twoColumn.items.map((item, index) => (
+                  <li className="helpdesk-feature-item" key={index}>
+                    <div className="helpdesk-feature-icon">
+                      <img src={item.icon} alt={item.title} />
+                    </div>
+                    <div className="helpdesk-feature-content">
+                      <h4>{item.title}</h4>
+                      <p>{item.text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="helpdesk-two-right">
+                <img src={twoColumnImage} alt="Two column visual" />
+
+                {isEditMode && (
+                  <div className="helpdesk-image-upload">
+                    <label className="helpdesk-upload-label">
+                      Change Image:
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange(setTwoColumnImage)}
+                      />
+                    </label>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* FAQ SECTION */}
+        {/* FAQ */}
         <section className="faq-section" id="faq-section">
           <div className="container-full">
             <div
               className="faq-header"
               contentEditable={isEditMode}
-              suppressContentEditableWarning={true}
+              suppressContentEditableWarning
             >
-              <h2 className="faq-title">Frequently Ask Question</h2>
+              <h2 className="faq-title">Frequently Asked Questions</h2>
               <p className="faq-subtitle">
-                Find answers to common questions about our IT services and
-                solutions
+                Find answers to common questions about our IT services
               </p>
             </div>
 
@@ -261,22 +211,15 @@ const Blogs = () => {
                 <div
                   key={index}
                   className={`faq-item ${openFAQ === index ? "active" : ""}`}
-                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div
                     className="faq-question"
                     onClick={() =>
                       setOpenFAQ(openFAQ === index ? -1 : index)
                     }
-                    contentEditable={isEditMode}
-                    suppressContentEditableWarning={true}
                   >
                     <span>{faq.question}</span>
-                    <div
-                      className={`faq-toggle ${
-                        openFAQ === index ? "open" : ""
-                      }`}
-                    >
+                    <div className="faq-toggle">
                       {openFAQ === index ? "−" : "+"}
                     </div>
                   </div>
@@ -284,8 +227,6 @@ const Blogs = () => {
                     className={`faq-answer ${
                       openFAQ === index ? "show" : ""
                     }`}
-                    contentEditable={isEditMode}
-                    suppressContentEditableWarning={true}
                   >
                     <p>{faq.answer}</p>
                   </div>
@@ -295,31 +236,39 @@ const Blogs = () => {
           </div>
         </section>
 
-        {/* BOTTOM CTA BANNER */}
+        {/* CTA */}
         <section
-          className="promotions-cta-banner"
+          className="cs-cta"
           contentEditable={isEditMode}
-          suppressContentEditableWarning={true}
+          suppressContentEditableWarning
         >
-          <div className="promotions-cta-inner">
-            <div className="promotions-cta-text">
-              <h2 className="promotions-cta-heading">
-                Lorem Ipsum content is
-                <br />
-                dummy text
-              </h2>
-              <p className="promotions-cta-desc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                commodo ligula eget dolor. Aenean massa.
+          <div className="cs-container cs-cta-inner">
+            <div className="cs-cta-left">
+              <h2>Let’s Build a Smarter, Secure IT Future Together</h2>
+              <p>
+                Have a question or need expert support? Reach out to our team
+                today—we’re here to help.
               </p>
-              <button className="promotions-cta-btn">Know more</button>
+              <button className="cs-btn-white" type="button">
+                Know more
+              </button>
             </div>
-            <div className="promotions-cta-image-wrap">
-              <img
-                src={ctaImg}
-                alt="CTA illustration"
-                className="promotions-cta-image"
-              />
+
+            <div className="cs-cta-right">
+              <img src={ctaImage} alt="CTA" />
+
+              {isEditMode && (
+                <div className="cs-image-upload">
+                  <label className="cs-upload-label">
+                    Change CTA Image:
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange(setCtaImage)}
+                    />
+                  </label>
+                </div>
+              )}
             </div>
           </div>
         </section>
