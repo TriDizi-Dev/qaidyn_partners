@@ -139,7 +139,7 @@
     rgba(124, 58, 237, 0.3)
   );
 
-  pointer-events: none; /* 🔥 must never block scroll */
+  pointer-events: none; /*🔥 must never block scroll */
   z-index: 0;
 }
 
