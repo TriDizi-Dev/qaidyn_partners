@@ -17,30 +17,37 @@ const ContactForm = () => {
         <div className="contact-form-card">
           <form className="contact-form">
             {/* FIRST NAME */}
-            <div className="form-group">
-              <label htmlFor="firstName" className="form-label">
-                First name
-              </label>
-              <input
-                id="firstName"
-                type="text"
-                className="form-input"
-                placeholder="First name"
-              />
-            </div>
+<div className="form-group">
+  <label htmlFor="firstName" className="form-label">
+    First name
+  </label>
+  <input
+    id="firstName"
+    name="firstName"
+    type="text"
+    className="form-input"
+    placeholder="First name"
+    autoComplete="given-name"
+    required
+  />
+</div>
 
-            {/* LAST NAME */}
-            <div className="form-group">
-              <label htmlFor="lastName" className="form-label">
-                Last name
-              </label>
-              <input
-                id="lastName"
-                type="text"
-                className="form-input"
-                placeholder="Last name"
-              />
-            </div>
+{/* LAST NAME */}
+<div className="form-group">
+  <label htmlFor="lastName" className="form-label">
+    Last name
+  </label>
+  <input
+    id="lastName"
+    name="lastName"
+    type="text"
+    className="form-input"
+    placeholder="Last name"
+    autoComplete="family-name"
+    required
+  />
+</div>
+
 
             {/* EMAIL */}
             <div className="form-group">
@@ -55,36 +62,47 @@ const ContactForm = () => {
               />
             </div>
 
-            {/* PHONE – single full-width field like design */}
             <div className="form-group">
-              <label htmlFor="phone" className="form-label">
-                Phone number
-              </label>
-              <div className="phone-wrapper">
-                <div className="phone-country">
-                  <select className="phone-country-select" defaultValue="au">
-                    <option value="au">AU</option>
-                    <option value="us">US</option>
-                    <option value="in">IN</option>
-                  </select>
+                  <label>Phone number</label>
+                  <div className="phone-input-wrapper">
+                    <select className="country-code">
+                      <option>AU</option>
+                      <option>UK</option>
+                      <option>US</option>
+                      <option>IN</option>
+                    </select>
+                    <input type="tel" placeholder="+61 (555) 000-0000" />
+                  </div>
                 </div>
-                <div className="phone-divider" />
-                <input
-                  id="phone"
-                  type="tel"
-                  className="phone-number-input"
-                  placeholder="+61 (555) 000-0000"
-                />
-              </div>
-            </div>
 
             {/* DATE */}
-            <div className="form-group">
-              <label htmlFor="date" className="form-label">
-                Select date
-              </label>
-              <input id="date" type="date" className="form-input" />
-            </div>
+                <div className="form-group">
+  <label>Select date</label>
+
+  <div className="date-input-wrapper">
+    <input
+      type="text"
+      className="date-display"
+      placeholder="December - 02 - 2022"
+      readOnly
+    />
+
+    <input
+      type="date"
+      className="date-picker"
+      onChange={(e) => {
+        const date = new Date(e.target.value);
+        const formatted = date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "2-digit",
+          year: "numeric"
+        }).replace(",", " -");
+        e.target.previousSibling.value = formatted;
+      }}
+      required
+    />
+  </div>
+</div>
 
             {/* MESSAGE */}
             <div className="form-group">
