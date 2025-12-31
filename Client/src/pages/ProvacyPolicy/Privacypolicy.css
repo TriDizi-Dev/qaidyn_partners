@@ -1,6 +1,4 @@
-/* ===============================
-   ROOT VARIABLES
-================================ */
+
 :root{
   --page-bg: #ffffff;
   --doc-bg: #D5FAFC;        
@@ -9,9 +7,6 @@
   --max-width: 1300px;
 }
 
-/* ===============================
-   PAGE
-================================ */
 .privacy-page{
   background: var(--page-bg);
   color: var(--text-color);
@@ -26,9 +21,6 @@
   padding: 0 1.2rem;
 }
 
-/* ===============================
-   HERO
-================================ */
 .privacy-hero{
   text-align: center;
 }
@@ -53,9 +45,6 @@
   font-family: "Roboto";
 }
 
-/* ===============================
-   MIDDLE CONTENT (FIGMA TYPOGRAPHY MATCH)
-================================ */
 .privacy-document{
   background: var(--doc-bg);
   border-radius: 25px;
@@ -73,56 +62,44 @@
   text-align: justify;
 }
 
-/* ===============================
-   SECTION TITLES (1. Introduction, etc.)
-================================ */
 .privacy-document h2{
   margin-top: 2.2rem;
   margin-bottom: 0.6rem;
 
   font-family: "Roboto", sans-serif;
   font-size: 25px;
-  font-weight: 700;          /* 🔥 Bold */
+  font-weight: 700;          
   line-height: 45px;
   letter-spacing: 0;
   color: #0C0C0D;
   text-align: justify;
 }
 
-/* ===============================
-   SUB TITLES (A. Personal Information)
-================================ */
 .privacy-document h3{
   margin-top: 1.6rem;
   margin-bottom: 0.4rem;
 
   font-family: "Roboto", sans-serif;
   font-size: 25px;
-  font-weight: 700;          /* 🔥 Bold */
+  font-weight: 700;         
   line-height: 45px;
   letter-spacing: 0;
   color: #0C0C0D;
   text-align: justify;
 }
 
-/* ===============================
-   PARAGRAPHS
-================================ */
 .privacy-document p{
   margin-bottom: 0.8rem;
 
   font-family: "Roboto", sans-serif;
   font-size: 25px;
-  font-weight: 400;          /* 🔥 Regular */
+  font-weight: 400;         
   line-height: 45px;
   letter-spacing: 0;
   color: #0C0C0D;
   text-align: justify;
 }
 
-/* ===============================
-   LISTS
-================================ */
 .privacy-document ul{
   margin: 0.6rem 0 1rem 2rem;
   padding: 0;
@@ -137,8 +114,6 @@
   list-style-type: disc;
 }
 
-
-/* container */
 .policy_last_container {
   position: relative;
   width: 100%;
@@ -153,7 +128,6 @@
   margin-bottom: 8vw;
 }
 
-/* inner banner area */
 .policy_last_inner {
   width: 95%;
   height: 15vw;
@@ -169,7 +143,6 @@
   box-shadow: 0 8px 30px rgba(3, 19, 34, 0.06);
 }
 
-/* heading and subtitle */
 .work-title {
   margin: 0;
   font-size: 1.6rem;
@@ -186,7 +159,7 @@
   line-height: 1.5;
 }
 
-/* CTA button */
+
 .ask-btn {
   display: inline-block;
   background: rgba(255, 255, 255, 1);
@@ -243,10 +216,6 @@
   opacity: 0.98;
 }
 
-
-/* ===============================
-   RESPONSIVE
-================================ */
 @media (max-width: 1024px){
   .privacy-document{
     padding: 2.6rem 2.6rem;
@@ -262,61 +231,80 @@
   }
 }
 
-@media (max-width: 600px){
-  .privacy-container{
+@media (max-width: 600px) {
+  .privacy-container {
     width: 95%;
+    padding-top: 100px;
   }
 
-  .privacy-title{
-    font-size: 1.15rem;
+  .privacy-title {
+    font-size: 1.3rem;
+    line-height: 1.3;
   }
 
-  .privacy-sub{
-    font-size: 0.92rem;
+  .privacy-sub {
+    font-size: 0.95rem;
   }
 
-  .privacy-document{
-    padding: 2rem 1.6rem;
-    border-radius: 18px;
+  .privacy-document {
+    padding: 1.6rem 1.3rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    border-radius: 16px;
   }
 
-  .privacy-document h2{
+  .privacy-document h2,
+  .privacy-document h3 {
     font-size: 1rem;
+    line-height: 1.4;
   }
 
   .privacy-document p,
-  .privacy-document ul{
-    font-size: 0.92rem;
+  .privacy-document ul {
+    font-size: 0.95rem;
   }
 
-  .policy_last_container{
-    width: 104vw;
-    margin-left: -10vw;
-    margin-top: 20vw;
-    margin-bottom: 40vw;
+  /* CTA FIX (NO OVERFLOW) */
+  .policy_last_container {
+    width: 100%;
+    margin: 4rem 0;
+    padding: 0 1rem;
   }
 
-  .policy_last_inner{
-    height: 70vw;
-    padding: 2.2rem 1.4rem;
+  .policy_last_inner {
+    width: 100%;
+    height: auto;
+    padding: 2rem 1.3rem;
+    border-radius: 10px;
   }
 
-  .work-title{
-    font-size: 1.05rem;
+  .work-title {
+    font-size: 1.1rem;
   }
 
-  .work-sub{
+  .work-sub {
     font-size: 0.9rem;
   }
 
-  .decor-left{
-    width: 3.8rem;
-    top: 32%;
-    transform: translate(-269%, -169%);
+  .ask-btn {
+    font-size: 0.9rem;
+    padding: 0.55rem 1.2rem;
   }
 
-  .decor-right{
-    width: 7.4rem;
-    transform: translate(-173%, 120%);
+  /* Decorations */
+  .decor-left {
+    width: 3.5rem;
+    top: -1.2rem;
+    left: -1.2rem;
+    transform: none;
+  }
+
+  .decor-right {
+    width: 6.5rem;
+    position: absolute;
+    right: -1rem;
+    bottom: -1rem;
+    transform: none;
   }
 }
+
