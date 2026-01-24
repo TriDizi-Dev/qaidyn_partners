@@ -49,8 +49,6 @@ import quoteImg from '../../assets/quote.png';
 import { useNavigate } from 'react-router-dom';
 
 import { useEditMode } from '../../components/context/EditModeContext.jsx';
-import { HomeContentProvider } from '../../hooks/useHomeContent.jsx';
-import EditableText from '../../components/Editable/EditableText.jsx';
 
 const HomePage = () => {
   const [isVisible, setIsVisible] = useState({});
@@ -624,16 +622,8 @@ const HomePage = () => {
                     alt={service.title}
                     className='cs-service-icon'
                   />
-                  <EditableText
-                    as='h3'
-                    contentKey={`home.services.card.${index}.title`}
-                    defaultValue={service.title}
-                  />
-                  <EditableText
-                    as='p'
-                    contentKey={`home.services.card.${index}.description`}
-                    defaultValue={service.description}
-                  />
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
                 </div>
               ))}
             </div>
@@ -650,16 +640,8 @@ const HomePage = () => {
                     alt={service.title}
                     className='cs-service-icon'
                   />
-                  <EditableText
-                    as='h3'
-                    contentKey={`home.services.card.${index + 3}.title`}
-                    defaultValue={service.title}
-                  />
-                  <EditableText
-                    as='p'
-                    contentKey={`home.services.card.${index + 3}.description`}
-                    defaultValue={service.description}
-                  />
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
                 </div>
               ))}
             </div>
@@ -1020,12 +1002,6 @@ const HomePage = () => {
                   <span className='blog-modal-date'>
                     {blogs[activeBlogModal].date}
                   </span>
-                  <EditableText
-                    as='span'
-                    className='blog-modal-date'
-                    contentKey={`home.blogs.card.${activeBlogModal}.date`}
-                    defaultValue={blogs[activeBlogModal].date}
-                  />
                 </div>
               </div>
             </div>
@@ -1061,7 +1037,7 @@ const HomePage = () => {
               className='btn-secondary'
               onClick={openContactModal}
             >
-              Know More
+              Know more
             </button>
           </div>
           <div className='cta-image'>
@@ -1185,12 +1161,4 @@ const HomePage = () => {
   );
 };
 
-const HomePageWrapper = () => {
-  return (
-    <HomeContentProvider>
-      <HomePage />
-    </HomeContentProvider>
-  );
-};
-
-export default HomePageWrapper;
+export default HomePage;
